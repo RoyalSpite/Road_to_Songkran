@@ -5,9 +5,12 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    [SerializeField] public int health = 30;
+    [SerializeField] public readonly int fullHealth = 30;
+    [SerializeField] public float health;
 
     [SerializeField] private float carSpeed = 15f;
+    
+    private short ChildAnimIndex = 0;
 
     [SerializeField] private float countDownPowerUp = 0;
 
@@ -24,6 +27,10 @@ public class Player : MonoBehaviour
     private Vector3 mousePosition;
 
     public Vector3 target = Vector3.zero;
+
+    void Start(){
+        health = fullHealth;
+    }
 
     // Update is called once per frame
     void Update()

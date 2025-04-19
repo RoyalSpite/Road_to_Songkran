@@ -6,6 +6,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private Transform[] roadPosition;
 
+    [SerializeField] private GameObject fuelGaugeNeedle;
+    private readonly float guageAngle = 40f;
+
     // [SerializeField] private TextMeshProUGUI ScoreText;
     // [SerializeField] private TextMeshProUGUI FuelText;
 
@@ -61,6 +64,12 @@ public class GameManager : MonoBehaviour
             }
 
         }
+
+        // update fuel
+        fuelGaugeNeedle.transform.eulerAngles = new Vector3(
+            0, 0,
+            (guageAngle * 2 * (player.health / player.fullHealth)) - guageAngle
+        );
 
     }
 }
