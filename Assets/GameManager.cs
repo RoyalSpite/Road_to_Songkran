@@ -12,12 +12,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int laneIndex = 0;
     [SerializeField] private int colIndex = 0;
 
-    void Start()
-    {
-        player.transform.position = new Vector3(
-            player.transform.position.x,
-            roadPosition[laneIndex].position.y
-        );
+    void Start(){
+        player.transform.position = roadPosition[laneIndex].position;
     }
 
     // Update is called once per frame
@@ -45,15 +41,19 @@ public class GameManager : MonoBehaviour
             }
             else if(Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.A)){
                 // left and right
+
+                // move based on car's width
+                float carWidth = player.GetComponent<SpriteRenderer>().bounds.size.x * 0.75f;
+
                 if(Input.GetKeyDown(KeyCode.D)){
                     if(colIndex < 3){
-                        player.target.x += 1;
+                        player.target.x += carWidth;
                         colIndex += 1;
                     }
                 }
                 else if(Input.GetKeyDown(KeyCode.A)){
                     if(colIndex > 0){
-                        player.target.x += -1;
+                        player.target.x -= carWidth;
                         colIndex -= 1;
                     }
                 }
