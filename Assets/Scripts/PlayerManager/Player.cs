@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // Start is called before the first frame update
+
     [SerializeField] public int health = 30;
 
     [SerializeField] private float carSpeed = 15f;
@@ -16,27 +16,32 @@ public class Player : MonoBehaviour
     // Shooting variables
     [Header("Shooting Variables")]
     [SerializeField] private GameObject[] projectilesList;
-    
     public int bulletIndex = 0;
-
     public Transform firePoint;   // จุดที่ยิงกระสุนออกไป
     public float fireRate = 0.2f;  // เวลาหน่วงระหว่างยิงแต่ละครั้ง
     private float fireTimer = 0f;
+
+    private Vector3 mousePosition;
 
     public Vector3 target = Vector3.zero;
 
     // Update is called once per frame
     void Update()
     {
+        // Update Mouse Position
+        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0f;
 
         // move
-        if(target != Vector3.zero){
+        if (target != Vector3.zero)
+        {
 
             float step =  carSpeed * Time.deltaTime; // calculate distance to move
             transform.position = Vector3.MoveTowards(transform.position, target, step);
 
             // Check if the position of the cube and sphere are approximately equal.
-            if (Vector3.Distance(transform.position, target) < 0.001f){
+            if (Vector3.Distance(transform.position, target) < 0.001f)
+            {
                 // Swap the position of the cylinder.
                 target = Vector3.zero;
             }
@@ -45,8 +50,9 @@ public class Player : MonoBehaviour
 
         // fire and cooldown
         fireTimer += Time.deltaTime;
-        if (fireTimer >= fireRate){
-            // Shoot();
+        if (fireTimer >= fireRate)
+        {
+            Shoot();
             fireTimer = 0f;
         }
         
@@ -54,11 +60,13 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collider){
  
-        if(collider.gameObject.CompareTag("Item")){
+        if(collider.gameObject.CompareTag("Item"))
+        {
             itemType =  collider.gameObject.GetComponent<Item>().type;
             // collider.gameObject.GetComponent<Item>().GetPowerUp();
 
-            if(itemType == ItemType.Fuel){
+            if(itemType == ItemType.Fuel)
+            {
                 health = Mathf.Min(30, health + 7);
                 itemType = ItemType.None;
             }
