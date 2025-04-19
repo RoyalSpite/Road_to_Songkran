@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
         if (target != Vector3.zero)
         {
 
-            float step =  carSpeed * Time.deltaTime; // calculate distance to move
+            float step = carSpeed * Time.deltaTime; // calculate distance to move
             transform.position = Vector3.MoveTowards(transform.position, target, step);
 
             // Check if the position of the cube and sphere are approximately equal.
@@ -55,17 +55,18 @@ public class Player : MonoBehaviour
             Shoot();
             fireTimer = 0f;
         }
-        
+
     }
 
-    private void OnTriggerEnter2D(Collider2D collider){
- 
-        if(collider.gameObject.CompareTag("Item"))
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+
+        if (collider.gameObject.CompareTag("Item"))
         {
-            itemType =  collider.gameObject.GetComponent<Item>().type;
+            itemType = collider.gameObject.GetComponent<Item>().type;
             // collider.gameObject.GetComponent<Item>().GetPowerUp();
 
-            if(itemType == ItemType.Fuel)
+            if (itemType == ItemType.Fuel)
             {
                 health = Mathf.Min(30, health + 7);
                 itemType = ItemType.None;
@@ -82,21 +83,23 @@ public class Player : MonoBehaviour
 
     }
 
-    void Shoot(){
+        void Shoot()
+        {
 
-        // สร้างกระสุน
-        projectilesList[bulletIndex].SetActive(true);
-        projectilesList[bulletIndex].transform.position = firePoint.position;
+            // สร้างกระสุน
+            projectilesList[bulletIndex].SetActive(true);
+            projectilesList[bulletIndex].transform.position = firePoint.position;
 
-        // หาทิศทางจาก firePoint ไปที่ตำแหน่งเมาส์
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0f;  // ล็อคไม่ให้มีค่า z
-        Vector3 direction = (mousePosition - firePoint.position).normalized;
+            // หาทิศทางจาก firePoint ไปที่ตำแหน่งเมาส์
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePosition.z = 0f;  // ล็อคไม่ให้มีค่า z
+            Vector3 direction = (mousePosition - firePoint.position).normalized;
 
-        // ส่งทิศทางให้กระสุน
-        projectilesList[bulletIndex].GetComponent<Projectile>().SetDirection(direction);
+            // ส่งทิศทางให้กระสุน
+            projectilesList[bulletIndex].GetComponent<Projectile>().SetDirection(direction);
 
-        bulletIndex = (bulletIndex + 1 == projectilesList.Length)? 0 : bulletIndex + 1;
+            bulletIndex = (bulletIndex + 1 == projectilesList.Length) ? 0 : bulletIndex + 1;
 
-    }
+        }
+    
 }
