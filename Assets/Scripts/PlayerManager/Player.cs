@@ -58,7 +58,7 @@ public class Player : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter2D(Collision2D collider){
+    private void OnTriggerEnter2D(Collider2D collider){
  
         if(collider.gameObject.CompareTag("Item"))
         {
@@ -71,6 +71,12 @@ public class Player : MonoBehaviour
                 itemType = ItemType.None;
             }
 
+            Destroy(collider.gameObject);
+        }
+
+        if (collider.gameObject.CompareTag("Obstrucle"))
+        {
+            Debug.Log("Hit");
             Destroy(collider.gameObject);
         }
 
