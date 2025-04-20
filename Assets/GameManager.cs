@@ -1,4 +1,6 @@
 using UnityEngine;
+using TMPro;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -6,11 +8,20 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private Transform[] roadPosition;
 
-    // [SerializeField] private TextMeshProUGUI ScoreText;
-    // [SerializeField] private TextMeshProUGUI FuelText;
+    [SerializeField] private GameObject fuelGaugeNeedle;
+    private readonly float guageAngle = 40f;
 
+    [Header("UI")]
+    [SerializeField] private TextMeshProUGUI ScoreText;
+    [SerializeField] private TextMeshProUGUI DistanceText;
+
+    [Header("MovementIndex")]
     [SerializeField] private int laneIndex = 0;
-    [SerializeField] private int colIndex = 0;
+
+    private int Score = 0;
+    private float Distance = 0f;
+
+    public static float gameProgressModifier = 1f;
 
     void Start(){
         player.transform.position = roadPosition[laneIndex].position;
@@ -39,28 +50,27 @@ public class GameManager : MonoBehaviour
                 player.target.y = roadPosition[laneIndex].position.y;
                 
             }
-            else if(Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.A)){
-                // left and right
-
-                // move based on car's width
-                float carWidth = player.GetComponent<SpriteRenderer>().bounds.size.x * 0.75f;
-
-                if(Input.GetKeyDown(KeyCode.D)){
-                    if(colIndex < 3){
-                        player.target.x += carWidth;
-                        colIndex += 1;
-                    }
-                }
-                else if(Input.GetKeyDown(KeyCode.A)){
-                    if(colIndex > 0){
-                        player.target.x -= carWidth;
-                        colIndex -= 1;
-                    }
-                }
-
-            }
 
         }
 
+        // update fuel
+        // draining fuel every second
+        player.health -= Time.deltaTime * 0.75f;
+        fuelGaugeNeedle.transform.eulerAngles = new Vector3(
+            0, 0,
+            (guageAngle * 2 * (player.health / player.fullHealth)) - guageAngle
+        );
+
+        // update score
+        ScoreText.SetText("Score : "+Score);
+
+        // update distance
+        Distance += Time.deltaTime / 6f;
+        DistanceText.SetText(Math.Round(Distance, 2) +" Km");
+
+    }
+
+    public void GetScore(int enemyScore){
+        Score += enemyScore * player.scoreMultiplier;
     }
 }
