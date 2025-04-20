@@ -6,9 +6,8 @@ public class EnemyBase : MonoBehaviour
 {
     public float moveSpeed = 3f;
 
-    public float enemyScore;
-
-    [SerializeField] private GameManager gameManager;
+    [SerializeField] private int enemyScore;
+    private GameManager gameManager;
 
     [SerializeField] private int health = 3;
     private Transform player;
@@ -16,6 +15,9 @@ public class EnemyBase : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
+
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
     }
 
     void Update()
@@ -26,8 +28,10 @@ public class EnemyBase : MonoBehaviour
             transform.Translate(direction * moveSpeed * Time.deltaTime);
         }
 
-        if (health == 0)
-        { 
+        if (health <= 0)
+        {   
+            // print("Enemy Destroyed");
+            gameManager.GetScore(enemyScore);
             Destroy(gameObject);
         }
     }
@@ -41,7 +45,7 @@ public class EnemyBase : MonoBehaviour
         }
         else if (collision.CompareTag("Bullet"))
         {
-            Debug.Log("Hit by Bullet!");
+            // Debug.Log("Hit by Bullet!");
             health -= 1;
         }
     }

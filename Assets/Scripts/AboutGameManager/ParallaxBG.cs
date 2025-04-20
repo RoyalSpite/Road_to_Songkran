@@ -1,21 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ParallaxBG : MonoBehaviour
 {
-    public float scrollSpeed = 2f;    // ¤ÇÒÁàÃçÇ·Õè¾×é¹àÅ×èÍ¹
-    public float resetPositionX = -20f; // ¨Ø´·Õè¾×é¹ÃÕà«çµ¡ÅÑºä»àÃÔèÁ
-    public float startPositionX = 20f; // ¨Ø´àÃÔèÁµé¹¢Í§¾×é¹
+    public float scrollSpeed = 2f;    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¹
+    public float resetPositionX = -20f; // ï¿½Ø´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½çµ¡ï¿½Ñºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public float startPositionX = 20f; // ï¿½Ø´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é¹¢Í§ï¿½ï¿½ï¿½
 
-    private void Start()
-    {
+    private Player player;
 
+    private void Start(){
+        player = GameObject.Find("Player").GetComponent<Player>();
     }
 
     void Update()
     {
-        transform.Translate(Vector3.left * scrollSpeed * Time.deltaTime);
+        transform.Translate(
+            Vector3.left * scrollSpeed * Time.deltaTime * player.baseCarSpeedMultiplier
+        );
 
         if (transform.position.x <= resetPositionX)
         {

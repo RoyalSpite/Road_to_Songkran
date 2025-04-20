@@ -8,13 +8,14 @@ public class Player : MonoBehaviour
     [SerializeField] public readonly int fullHealth = 30;
     [SerializeField] public float health;
 
-    [SerializeField] private float carSpeed = 15f;
+    [SerializeField] private float moveSpeed = 15f;
     
     [Header("Item")]
-    [SerializeField] private ItemType getItemType = ItemType.None;
-    [SerializeField] private float countDownPowerUp = 0;
+    private float[] powerUpCountDown = new float[2];
     [SerializeField] private readonly int baseScoreMultiplier = 1;
     [SerializeField] public int scoreMultiplier;
+    [SerializeField] public readonly int baseCarSpeedMultiplier = 1;
+    [SerializeField] public int carSpeedMultiplier;
 
 
     [Header("Child on truck")]
@@ -36,6 +37,10 @@ public class Player : MonoBehaviour
     void Start(){
         health = fullHealth;
         scoreMultiplier = baseScoreMultiplier;
+        carSpeedMultiplier = baseCarSpeedMultiplier;
+
+        powerUpCountDown[0] = 0f;
+        powerUpCountDown[1] = 0f;
     }
 
     // Update is called once per frame
@@ -49,7 +54,7 @@ public class Player : MonoBehaviour
         if (target != Vector3.zero)
         {
 
-            float step = carSpeed * Time.deltaTime; // calculate distance to move
+            float step = moveSpeed * Time.deltaTime; // calculate distance to move
             transform.position = Vector3.MoveTowards(transform.position, target, step);
 
             // Check if the position of the cube and sphere are approximately equal.
@@ -90,44 +95,7 @@ public class Player : MonoBehaviour
             animIndex = 3;
         }
 
-        print(animIndex);
-
         Child.GetComponent<Animator>().SetInteger("AnimIndex", animIndex);
-
-    }
-
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-
-        if (collider.gameObject.CompareTag("Item"))
-        {
-            getItemType = collider.gameObject.GetComponent<Item>().type;
-            // collider.gameObject.GetComponent<Item>().GetPowerUp();
-            switch(getItemType){
-                case ItemType.Fuel:{
-                    health = Mathf.Min(30, health + 7);
-                    getItemType = ItemType.None;
-                    break;
-                }
-                case ItemType.Speed:{
-                    break;
-                }
-                case ItemType.DoubleScore:{
-                    scoreMultiplier = 2;
-                    break;
-                }
-
-            }
-
-            Destroy(collider.gameObject);
-        }
-
-        if (collider.gameObject.CompareTag("Obstrucle"))
-        {
-            Debug.Log("Hit");
-            health -= 5;            
-            Destroy(collider.gameObject);
-        }
 
     }
 
