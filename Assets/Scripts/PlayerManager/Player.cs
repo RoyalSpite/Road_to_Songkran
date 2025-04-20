@@ -10,11 +10,12 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float carSpeed = 15f;
     
-    private short ChildAnimIndex = 0;
-
     [SerializeField] private float countDownPowerUp = 0;
 
     [SerializeField] private ItemType itemType = ItemType.None;
+
+    [SerializeField] private GameObject Child;
+    [SerializeField] private int  animIndex = 0;
 
     // Shooting variables
     [Header("Shooting Variables")]
@@ -63,6 +64,31 @@ public class Player : MonoBehaviour
             fireTimer = 0f;
         }
 
+        // child animation control
+        Vector3 dir = (mousePosition - transform.position).normalized;
+        float faceAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        print(faceAngle);
+
+        if(faceAngle >= -150f && faceAngle <= -40f){
+            animIndex = 2;
+        }
+        else if(faceAngle > -40f && faceAngle < 40f){
+            animIndex = 0;
+        }
+        else if(faceAngle <= 150f && faceAngle >= 40f){
+            animIndex = 1;
+        }
+        else if(
+            (faceAngle > 150f && faceAngle <= 180f) || 
+            (faceAngle >= -180f && faceAngle < -150f)
+        ){
+            animIndex = 3;
+        }
+
+        Child.GetComponent<Animator>().SetInteger("AnimIndex", animIndex);
+        
+        Child.GetComponent<SpriteRenderer>().flipX = animIndex == 3;
+
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -72,11 +98,19 @@ public class Player : MonoBehaviour
         {
             itemType = collider.gameObject.GetComponent<Item>().type;
             // collider.gameObject.GetComponent<Item>().GetPowerUp();
+            switch(itemType){
+                case ItemType.Fuel:{
+                    health = Mathf.Min(30, health + 7);
+                    itemType = ItemType.None;
+                    break;
+                }
+                case ItemType.Speed:{
+                    break;
+                }
+                case ItemType.DoubleScore:{
+                    break;
+                }
 
-            if (itemType == ItemType.Fuel)
-            {
-                health = Mathf.Min(30, health + 7);
-                itemType = ItemType.None;
             }
 
             Destroy(collider.gameObject);
@@ -85,28 +119,28 @@ public class Player : MonoBehaviour
         if (collider.gameObject.CompareTag("Obstrucle"))
         {
             Debug.Log("Hit");
+            health -= 5;            
             Destroy(collider.gameObject);
         }
 
     }
 
-        void Shoot()
-        {
+    void Shoot(){
 
-            // สร้างกระสุน
-            projectilesList[bulletIndex].SetActive(true);
-            projectilesList[bulletIndex].transform.position = firePoint.position;
+        // สร้างกระสุน
+        projectilesList[bulletIndex].SetActive(true);
+        projectilesList[bulletIndex].transform.position = firePoint.position;
 
-            // หาทิศทางจาก firePoint ไปที่ตำแหน่งเมาส์
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePosition.z = 0f;  // ล็อคไม่ให้มีค่า z
-            Vector3 direction = (mousePosition - firePoint.position).normalized;
+        // หาทิศทางจาก firePoint ไปที่ตำแหน่งเมาส์
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0f;  // ล็อคไม่ให้มีค่า z
+        Vector3 direction = (mousePosition - firePoint.position).normalized;
 
-            // ส่งทิศทางให้กระสุน
-            projectilesList[bulletIndex].GetComponent<Projectile>().SetDirection(direction);
+        // ส่งทิศทางให้กระสุน
+        projectilesList[bulletIndex].GetComponent<Projectile>().SetDirection(direction);
 
-            bulletIndex = (bulletIndex + 1 == projectilesList.Length) ? 0 : bulletIndex + 1;
+        bulletIndex = (bulletIndex + 1 == projectilesList.Length) ? 0 : bulletIndex + 1;
 
-        }
+    }
     
 }

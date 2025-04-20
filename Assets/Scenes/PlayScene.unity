@@ -1696,6 +1696,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1373500161}
   - component: {fileID: 1373500162}
+  - component: {fileID: 1373500163}
   m_Layer: 0
   m_Name: Child
   m_TagString: Untagged
@@ -1712,7 +1713,7 @@ Transform:
   m_GameObject: {fileID: 1373500160}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.256, y: 0.196, z: 0}
+  m_LocalPosition: {x: -0.275, y: 0.196, z: 0}
   m_LocalScale: {x: 0.7522625, y: 0.7522625, z: 0.7522625}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1770,6 +1771,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1373500163
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1373500160}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: dedba61d777fd074b880c51dda10bf92, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1417160740
 GameObject:
   m_ObjectHideFlags: 0
@@ -2348,7 +2370,6 @@ GameObject:
   - component: {fileID: 1988345286}
   - component: {fileID: 1988345285}
   - component: {fileID: 1988345284}
-  - component: {fileID: 1988345287}
   - component: {fileID: 1988345288}
   - component: {fileID: 1988345289}
   m_Layer: 0
@@ -2374,6 +2395,8 @@ MonoBehaviour:
   carSpeed: 15
   countDownPowerUp: 0
   itemType: 0
+  Child: {fileID: 1373500160}
+  animIndex: 0
   projectilesList:
   - {fileID: 1783150673}
   - {fileID: 57306524}
@@ -2458,27 +2481,6 @@ Transform:
   - {fileID: 1692601112}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &1988345287
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1988345283}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: dedba61d777fd074b880c51dda10bf92, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!61 &1988345288
 BoxCollider2D:
   m_ObjectHideFlags: 0
