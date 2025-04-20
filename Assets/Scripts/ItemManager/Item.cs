@@ -27,11 +27,14 @@ public class Item : MonoBehaviour{
                     break;
                 }
                 case GroundItemType.Speed:{
+                    player.carSpeedMultiplier = 1.25f;
+                    player.speedCountDown = 3f;
                     Destroy(gameObject);
                     break;
                 }
                 case GroundItemType.DoubleScore:{
                     player.scoreMultiplier = 2;
+                    player.scoreCountDown = 3f;
                     Destroy(gameObject);
                     break;
                 }
@@ -42,7 +45,8 @@ public class Item : MonoBehaviour{
                     break;
                 }
                 case GroundItemType.Hole:{
-                    
+                    player.carSpeedMultiplier = 0.75f;
+                    player.speedCountDown = 3f;
                     break;
                 }
                 case GroundItemType.StopSign:{

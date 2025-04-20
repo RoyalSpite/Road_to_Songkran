@@ -15,7 +15,7 @@ public class ParallaxBG : MonoBehaviour
     void Update()
     {
         transform.Translate(
-            Vector3.left * scrollSpeed * Time.deltaTime * player.baseCarSpeedMultiplier
+            Vector3.left * scrollSpeed * Time.deltaTime * player.carSpeedMultiplier
         );
 
         if (transform.position.x <= resetPositionX)

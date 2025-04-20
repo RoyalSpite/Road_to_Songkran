@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     private int Score = 0;
     private float Distance = 0f;
 
+    public static float gameProgressModifier = 1f;
+
     void Start(){
         player.transform.position = roadPosition[laneIndex].position;
     }

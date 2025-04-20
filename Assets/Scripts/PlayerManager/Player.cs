@@ -11,11 +11,12 @@ public class Player : MonoBehaviour
     [SerializeField] private float moveSpeed = 15f;
     
     [Header("Item")]
-    private float[] powerUpCountDown = new float[2];
     [SerializeField] private readonly int baseScoreMultiplier = 1;
     [SerializeField] public int scoreMultiplier;
+    public float scoreCountDown = 0f;
     [SerializeField] public readonly int baseCarSpeedMultiplier = 1;
-    [SerializeField] public int carSpeedMultiplier;
+    [SerializeField] public float carSpeedMultiplier;
+    public float speedCountDown = 0f;
 
 
     [Header("Child on truck")]
@@ -39,8 +40,6 @@ public class Player : MonoBehaviour
         scoreMultiplier = baseScoreMultiplier;
         carSpeedMultiplier = baseCarSpeedMultiplier;
 
-        powerUpCountDown[0] = 0f;
-        powerUpCountDown[1] = 0f;
     }
 
     // Update is called once per frame
@@ -96,6 +95,27 @@ public class Player : MonoBehaviour
         }
 
         Child.GetComponent<Animator>().SetInteger("AnimIndex", animIndex);
+
+        // speed modify contdown
+        if(speedCountDown > 0){
+            speedCountDown -= Time.deltaTime;
+
+            if(speedCountDown <= 0){
+                carSpeedMultiplier = baseCarSpeedMultiplier;
+                speedCountDown = 0;
+            }
+        }
+
+        // score modify countdown
+        if(scoreCountDown > 0){
+            scoreCountDown -= Time.deltaTime;
+
+            if(scoreCountDown <= 0){
+                scoreMultiplier = baseScoreMultiplier;
+                scoreCountDown = 0;
+            }
+
+        }
 
     }
 
