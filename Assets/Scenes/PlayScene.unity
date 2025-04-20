@@ -701,7 +701,7 @@ Transform:
   m_GameObject: {fileID: 355407053}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10, y: 0, z: 0}
+  m_LocalPosition: {x: 10, y: 0.07, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1482,7 +1482,7 @@ Transform:
   m_GameObject: {fileID: 955530363}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.62500006, z: 0}
+  m_LocalPosition: {x: 0, y: -0.625, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1713,7 +1713,7 @@ Transform:
   m_GameObject: {fileID: 1373500160}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.275, y: 0.196, z: 0}
+  m_LocalPosition: {x: -0.28, y: 0.196, z: 0}
   m_LocalScale: {x: 0.7522625, y: 0.7522625, z: 0.7522625}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1910,7 +1910,7 @@ Transform:
   m_GameObject: {fileID: 1587232120}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10, y: -2.19, z: 0}
+  m_LocalPosition: {x: 10, y: -2.13, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2285,7 +2285,7 @@ Transform:
   m_GameObject: {fileID: 1965101184}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10, y: -1.07, z: 0}
+  m_LocalPosition: {x: 10, y: -1.11, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2353,7 +2353,7 @@ Transform:
   m_GameObject: {fileID: 1988141746}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10, y: 1.12, z: 0}
+  m_LocalPosition: {x: 10, y: 1.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2393,8 +2393,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 30
   carSpeed: 15
+  getItemType: 0
   countDownPowerUp: 0
-  itemType: 0
+  scoreMultiplier: 0
   Child: {fileID: 1373500160}
   animIndex: 0
   projectilesList:

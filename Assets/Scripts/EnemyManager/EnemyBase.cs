@@ -6,6 +6,10 @@ public class EnemyBase : MonoBehaviour
 {
     public float moveSpeed = 3f;
 
+    public float enemyScore;
+
+    [SerializeField] private GameManager gameManager;
+
     [SerializeField] private int health = 3;
     private Transform player;
 
@@ -22,7 +26,10 @@ public class EnemyBase : MonoBehaviour
             transform.Translate(direction * moveSpeed * Time.deltaTime);
         }
 
-        if (health == 0) Destroy(gameObject);
+        if (health == 0)
+        { 
+            Destroy(gameObject);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -36,7 +43,6 @@ public class EnemyBase : MonoBehaviour
         {
             Debug.Log("Hit by Bullet!");
             health -= 1;
-            Destroy(collision.gameObject);
         }
     }
 }

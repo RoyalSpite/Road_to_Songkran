@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
+    [Header("Health")]
     [SerializeField] public readonly int fullHealth = 30;
     [SerializeField] public float health;
 
     [SerializeField] private float carSpeed = 15f;
     
+    [Header("Item")]
+    [SerializeField] private ItemType getItemType = ItemType.None;
     [SerializeField] private float countDownPowerUp = 0;
+    [SerializeField] private readonly int baseScoreMultiplier = 1;
+    [SerializeField] public int scoreMultiplier;
 
-    [SerializeField] private ItemType itemType = ItemType.None;
 
+    [Header("Child on truck")]
     [SerializeField] private GameObject Child;
     [SerializeField] private int  animIndex = 0;
 
@@ -31,6 +35,7 @@ public class Player : MonoBehaviour
 
     void Start(){
         health = fullHealth;
+        scoreMultiplier = baseScoreMultiplier;
     }
 
     // Update is called once per frame
@@ -67,16 +72,16 @@ public class Player : MonoBehaviour
         // child animation control
         Vector3 dir = (mousePosition - transform.position).normalized;
         float faceAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        print(faceAngle);
+        // print(faceAngle);
 
         if(faceAngle >= -150f && faceAngle <= -40f){
-            animIndex = 2;
+            animIndex = 1;
         }
         else if(faceAngle > -40f && faceAngle < 40f){
             animIndex = 0;
         }
         else if(faceAngle <= 150f && faceAngle >= 40f){
-            animIndex = 1;
+            animIndex = 2;
         }
         else if(
             (faceAngle > 150f && faceAngle <= 180f) || 
@@ -85,9 +90,9 @@ public class Player : MonoBehaviour
             animIndex = 3;
         }
 
+        print(animIndex);
+
         Child.GetComponent<Animator>().SetInteger("AnimIndex", animIndex);
-        
-        Child.GetComponent<SpriteRenderer>().flipX = animIndex == 3;
 
     }
 
@@ -96,18 +101,19 @@ public class Player : MonoBehaviour
 
         if (collider.gameObject.CompareTag("Item"))
         {
-            itemType = collider.gameObject.GetComponent<Item>().type;
+            getItemType = collider.gameObject.GetComponent<Item>().type;
             // collider.gameObject.GetComponent<Item>().GetPowerUp();
-            switch(itemType){
+            switch(getItemType){
                 case ItemType.Fuel:{
                     health = Mathf.Min(30, health + 7);
-                    itemType = ItemType.None;
+                    getItemType = ItemType.None;
                     break;
                 }
                 case ItemType.Speed:{
                     break;
                 }
                 case ItemType.DoubleScore:{
+                    scoreMultiplier = 2;
                     break;
                 }
 

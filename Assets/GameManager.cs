@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int laneIndex = 0;
     [SerializeField] private int colIndex = 0;
 
+    private static int Score = 0;
+
     void Start(){
         player.transform.position = roadPosition[laneIndex].position;
     }
@@ -71,5 +73,9 @@ public class GameManager : MonoBehaviour
             (guageAngle * 2 * (player.health / player.fullHealth)) - guageAngle
         );
 
+    }
+
+    void GetScore(int enemyScore){
+        Score += enemyScore * player.scoreMultiplier;
     }
 }
