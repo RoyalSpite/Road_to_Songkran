@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     [Header("Health")]
-    [SerializeField] public readonly int fullHealth = 30;
+    [SerializeField] public readonly int fullHealth = 100;
     [SerializeField] public float health;
 
     [SerializeField] private float moveSpeed = 15f;
@@ -115,6 +113,11 @@ public class Player : MonoBehaviour
                 scoreCountDown = 0;
             }
 
+        }
+
+        // game over
+        if(health <= 0){
+            Time.timeScale = 0;
         }
 
     }

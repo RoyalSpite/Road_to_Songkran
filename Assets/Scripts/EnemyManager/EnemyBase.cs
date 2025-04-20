@@ -9,7 +9,7 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] private int enemyScore;
     private GameManager gameManager;
 
-    [SerializeField] private int health = 3;
+    [SerializeField] private int health = 1;
     private Transform player;
 
     void Start()
@@ -38,13 +38,11 @@ public class EnemyBase : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
-        {
+        if (collision.CompareTag("Player")){
             collision.GetComponent<Player>().health -= 1;
             Destroy(gameObject);
         }
-        else if (collision.CompareTag("Bullet"))
-        {
+        else if (collision.CompareTag("Bullet")){
             // Debug.Log("Hit by Bullet!");
             health -= 1;
         }

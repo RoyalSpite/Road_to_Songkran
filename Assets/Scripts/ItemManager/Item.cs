@@ -45,11 +45,14 @@ public class Item : MonoBehaviour{
                     break;
                 }
                 case GroundItemType.Hole:{
-                    player.carSpeedMultiplier = 0.75f;
-                    player.speedCountDown = 3f;
+                    // One hit kill
                     break;
                 }
                 case GroundItemType.StopSign:{
+                    player.health -= 10;
+
+                    player.carSpeedMultiplier = 0.85f;
+                    player.speedCountDown = 3f;
                     Destroy(gameObject);
                     break;
                 }
