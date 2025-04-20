@@ -40,16 +40,17 @@ public class Item : MonoBehaviour{
                 }
                 // for obstacle
                 case GroundItemType.Barrel:{
-                    player.health -= 5;
+                    player.health = Mathf.Max(player.health - 5, 0);
                     Destroy(gameObject);
                     break;
                 }
                 case GroundItemType.Hole:{
                     // One hit kill
+                    player.health = 0;
                     break;
                 }
                 case GroundItemType.StopSign:{
-                    player.health -= 10;
+                    player.health = Mathf.Max(player.health - 10, 0);
 
                     player.carSpeedMultiplier = 0.85f;
                     player.speedCountDown = 3f;

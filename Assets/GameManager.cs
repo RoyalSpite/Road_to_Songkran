@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
 
         // update fuel
         // draining fuel every second
-        player.health -= Time.deltaTime * 0.5f;
+        player.health -= Time.deltaTime * 0.75f;
         fuelGaugeNeedle.transform.eulerAngles = new Vector3(
             0, 0,
             (guageAngle * 2 * (player.health / player.fullHealth)) - guageAngle
@@ -65,8 +65,8 @@ public class GameManager : MonoBehaviour
         ScoreText.SetText("Score : "+Score);
 
         // update distance
-        Distance += Time.deltaTime * player.carSpeedMultiplier;
-        DistanceText.SetText(Math.Round(Distance, 1) +" Km");
+        Distance += Time.deltaTime / 6f;
+        DistanceText.SetText(Math.Round(Distance, 2) +" Km");
 
     }
 
