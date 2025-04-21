@@ -5,21 +5,32 @@ using UnityEngine.EventSystems;
 
 public class Pointer : MonoBehaviour
 {
-    public RectTransform pointer; // √Ÿª≈Ÿ°»√∑’ËÕ¬“°„ÀÈ¢¬—∫
+    [SerializeField]private RectTransform pointer; 
+    [SerializeField]private RectTransform audioBut; 
+    [SerializeField]private RectTransform Logo; 
+    [SerializeField]private float additionalOffsetX = -25f;
 
     private void Update()
     {
-        // ‡™Á°«Ë“‡¡“ Ï™’ÈÕ¬ŸË∫πÕ–‰√
         GameObject hoveredObject = GetUIObjectUnderMouse();
 
         if (hoveredObject != null)
         {
-            // ¬È“¬ pointer ‰ª∑’Ëµ”·ÀπËßªÿË¡∑’Ë‡¡“ Ï™’È
-            pointer.position = hoveredObject.transform.position;
+            RectTransform buttonRect = hoveredObject.GetComponent<RectTransform>();
+            if (buttonRect != null)
+            {
+                // ‡∏≠‡πà‡∏≤‡∏ô‡∏Ç‡∏ô‡∏≤‡∏î‡∏Ç‡∏≠‡∏á‡∏õ‡∏∏‡πà‡∏° (width)
+                float buttonWidth = buttonRect.rect.width;
+
+                // ‡∏Ñ‡∏≥‡∏ô‡∏ß‡∏ì‡∏ï‡∏≥‡πÅ‡∏´‡∏ô‡πà‡∏á pointer (‡πÑ‡∏õ‡∏ó‡∏≤‡∏á‡∏ã‡πâ‡∏≤‡∏¢‡∏Ñ‡∏£‡∏∂‡πà‡∏á‡∏´‡∏ô‡∏∂‡πà‡∏á‡∏Ç‡∏≠‡∏á‡∏õ‡∏∏‡πà‡∏° + offset ‡πÄ‡∏û‡∏¥‡πà‡∏°‡πÄ‡∏ï‡∏¥‡∏°)
+                Vector3 newPos = hoveredObject.transform.position;
+                newPos.x -= (buttonWidth / 2f) + Mathf.Abs(additionalOffsetX);
+
+                pointer.position = newPos;
+            }
         }
         else
         {
-            // ∂È“‰¡Ë™’ÈÕ–‰√‡≈¬ Õ“®®–´ËÕπ pointer ‰«È°Á‰¥È
             // pointer.gameObject.SetActive(false);
         }
     }
@@ -34,10 +45,15 @@ public class Pointer : MonoBehaviour
         var raycastResults = new System.Collections.Generic.List<RaycastResult>();
         EventSystem.current.RaycastAll(pointerData, raycastResults);
 
-        if (raycastResults.Count > 0)
+        foreach (var result in raycastResults)
         {
-            return raycastResults[0].gameObject;
+            // ‡πÄ‡∏ä‡πá‡∏Å‡∏ß‡πà‡∏≤‡πÑ‡∏°‡πà‡πÉ‡∏ä‡πà‡∏ï‡∏±‡∏ß pointer ‡πÄ‡∏≠‡∏á
+            if (result.gameObject != pointer.gameObject && result.gameObject != audioBut.gameObject && result.gameObject != Logo.gameObject)
+            {
+                return result.gameObject;
+            }
         }
+
         return null;
     }
 }
