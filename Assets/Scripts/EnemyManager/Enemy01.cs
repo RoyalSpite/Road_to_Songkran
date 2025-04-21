@@ -20,11 +20,9 @@ public class Enemy01 : EnemyBase{
 
         if (player != null){
 
-            if(!inRange){
+            inRange = Vector2.Distance(player.position, transform.position) <= 6;
 
-                if(Vector2.Distance(player.position, transform.position) <= 6){
-                    inRange = true;
-                }
+            if(!inRange){
 
                 Vector3 direction = (player.position - transform.position).normalized;
                 transform.Translate(direction * moveSpeed * Time.deltaTime);
@@ -41,15 +39,21 @@ public class Enemy01 : EnemyBase{
             }
         }
 
+        // animation
+        gameObject.GetComponent<Animator>().SetBool("isShooting",inRange);
+        gameObject.GetComponent<Animator>().SetBool("isPlayerUpper",
+            player.transform.position.y > transform.position.y
+        );
+
+
         if (health <= 0){   
             // print("Enemy Destroyed");
             gameManager.GetScore(enemyScore);
             //Destroy(gameObject);
             gameObject.SetActive(false);
         }
-        
-        coolDown += Time.deltaTime;
 
+        coolDown += Time.deltaTime;
     }
 
     void Fire(){

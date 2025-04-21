@@ -34,6 +34,7 @@ public class EnemyBase : MonoBehaviour
             gameManager.GetScore(enemyScore);
             Destroy(gameObject);
         }
+
     }
 
     public void SetPosition(Vector3 pos){
