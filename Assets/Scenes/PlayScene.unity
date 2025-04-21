@@ -820,6 +820,54 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c88590721f0db741b4d98211c7e2984, type: 3}
+--- !u!1 &462363599
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 462363600}
+  - component: {fileID: 462363601}
+  m_Layer: 0
+  m_Name: ShopSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &462363600
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 462363599}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1652131952}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &462363601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 462363599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aeae68ab9e840c40bb16dc2022ca653, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shopSignPrefab: {fileID: 2775764293491566819, guid: fbad4362a23fcf14da4a0cf6a16c6831, type: 3}
+  shopPrefab: {fileID: 677126189342281911, guid: b23cb25ee947fba4984253db8891985d, type: 3}
+  spawnPoint: {fileID: 1652131952}
 --- !u!1001 &476652462
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1337,6 +1385,8 @@ MonoBehaviour:
   ScoreText: {fileID: 237260003}
   DistanceText: {fileID: 566407185}
   laneIndex: 0
+  Score: 0
+  Distance: 0
 --- !u!4 &832738156
 Transform:
   m_ObjectHideFlags: 0
@@ -2323,6 +2373,37 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5893958636677277508, guid: 8fe5ee3fe337020478311bd4791fe0df, type: 3}
   m_PrefabInstance: {fileID: 1648049173}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1652131951
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1652131952}
+  m_Layer: 0
+  m_Name: SpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1652131952
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1652131951}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10, y: 2.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 462363600}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1692601111
 GameObject:
   m_ObjectHideFlags: 0
@@ -2775,6 +2856,7 @@ MonoBehaviour:
   bulletIndex: 0
   firePoint: {fileID: 1692601112}
   fireRate: 0.5
+  enemyPresence: 0
   target: {x: 0, y: 0, z: 0}
 --- !u!212 &1988345285
 SpriteRenderer:
@@ -3211,3 +3293,4 @@ SceneRoots:
   - {fileID: 1144864651}
   - {fileID: 1730579451}
   - {fileID: 476652462}
+  - {fileID: 462363600}
