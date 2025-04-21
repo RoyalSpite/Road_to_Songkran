@@ -67,7 +67,7 @@ public class Player : MonoBehaviour
         fireTimer += Time.deltaTime;
         if (fireTimer >= fireRate)
         {
-            // Shoot();
+            Shoot();
             fireTimer = 0f;
         }
 

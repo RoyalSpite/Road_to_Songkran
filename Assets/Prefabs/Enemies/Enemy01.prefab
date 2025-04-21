@@ -198,7 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
-  enemyScore: 0
+  enemyScore: 10
   health: 1
   fireOrigin: {fileID: 7164423782934829121}
   ProjectilesPool:
