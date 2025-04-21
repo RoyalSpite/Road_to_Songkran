@@ -831,7 +831,7 @@ GameObject:
   - component: {fileID: 462363600}
   - component: {fileID: 462363601}
   m_Layer: 0
-  m_Name: ShopSpawner
+  m_Name: ShopManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1572,7 +1572,7 @@ GameObject:
   - component: {fileID: 934346487}
   - component: {fileID: 934346486}
   m_Layer: 0
-  m_Name: Road (1)
+  m_Name: Road02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1591,8 +1591,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollSpeed: 5
-  resetPositionX: -17.97
-  startPositionX: 17.9
+  resetPositionX: -17.98
+  startPositionX: 17.98
 --- !u!212 &934346487
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1855,8 +1855,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollSpeed: 5
-  resetPositionX: -17.97
-  startPositionX: 17.9
+  resetPositionX: -17.98
+  startPositionX: 17.98
 --- !u!1001 &1144864651
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2856,7 +2856,7 @@ MonoBehaviour:
   bulletIndex: 0
   firePoint: {fileID: 1692601112}
   fireRate: 0.5
-  enemyPresence: 0
+  enemyPresence: 1
   target: {x: 0, y: 0, z: 0}
 --- !u!212 &1988345285
 SpriteRenderer:
@@ -2919,7 +2919,7 @@ Transform:
   m_GameObject: {fileID: 1988345283}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.94, y: 1.18, z: 0}
+  m_LocalPosition: {x: -2.22, y: 1.27, z: 0}
   m_LocalScale: {x: 2.21, y: 2.21, z: 2.21}
   m_ConstrainProportionsScale: 1
   m_Children:

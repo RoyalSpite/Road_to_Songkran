@@ -9,7 +9,7 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] protected int enemyScore;
     protected GameManager gameManager;
 
-    [SerializeField] protected int health = 1;
+    [SerializeField] public int health = 1;
     protected Transform player;
 
     protected void Start()
