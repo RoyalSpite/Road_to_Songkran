@@ -21,7 +21,11 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy")){
+        if(gameObject.CompareTag("Bullet") && other.CompareTag("Enemy")){
+            OnBecameInvisible();
+        }
+        else if(gameObject.CompareTag("EnemyBullet") && other.CompareTag("Player")){
+            other.gameObject.GetComponent<Player>().health -= 2.5f;
             OnBecameInvisible();
         }
     }

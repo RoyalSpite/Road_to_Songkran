@@ -6,13 +6,13 @@ public class EnemyBase : MonoBehaviour
 {
     public float moveSpeed = 3f;
 
-    [SerializeField] private int enemyScore;
-    private GameManager gameManager;
+    [SerializeField] protected int enemyScore;
+    protected GameManager gameManager;
 
-    [SerializeField] private int health = 1;
-    private Transform player;
+    [SerializeField] protected int health = 1;
+    protected Transform player;
 
-    void Start()
+    protected void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
 
@@ -20,7 +20,7 @@ public class EnemyBase : MonoBehaviour
 
     }
 
-    void Update()
+    protected void Update()
     {
         if (player != null)
         {
@@ -36,15 +36,7 @@ public class EnemyBase : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player")){
-            collision.GetComponent<Player>().health -= 1;
-            Destroy(gameObject);
-        }
-        else if (collision.CompareTag("Bullet")){
-            // Debug.Log("Hit by Bullet!");
-            health -= 1;
-        }
+    public void SetPosition(Vector3 pos){
+        transform.position = pos;
     }
 }
