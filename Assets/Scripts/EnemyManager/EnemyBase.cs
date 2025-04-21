@@ -40,4 +40,8 @@ public class EnemyBase : MonoBehaviour
     public void SetPosition(Vector3 pos){
         transform.position = pos;
     }
+
+    void OnBecameVisible(){
+        
+    }
 }

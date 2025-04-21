@@ -29,6 +29,8 @@ public class Player : MonoBehaviour
     public float fireRate = 0.2f;  // เวลาหน่วงระหว่างยิงแต่ละครั้ง
     private float fireTimer = 0f;
 
+    public bool enemyPresence = false;
+
     private Vector3 mousePosition;
 
     public Vector3 target = Vector3.zero;
@@ -65,7 +67,7 @@ public class Player : MonoBehaviour
 
         // fire and cooldown
         fireTimer += Time.deltaTime;
-        if (fireTimer >= fireRate)
+        if (fireTimer >= fireRate && enemyPresence)
         {
             Shoot();
             fireTimer = 0f;

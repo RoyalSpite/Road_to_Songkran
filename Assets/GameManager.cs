@@ -18,9 +18,9 @@ public class GameManager : MonoBehaviour
     [Header("MovementIndex")]
     [SerializeField] private int laneIndex = 0;
 
-    [Header("Progerss")]
-    private int Score = 0;
-    private float Distance = 0f;
+    [Header("Progress")]
+    public int Score = 0;
+    public float Distance = 0f;
 
     public static float gameProgressModifier = 1f;
 
@@ -68,6 +68,9 @@ public class GameManager : MonoBehaviour
         // update distance
         Distance += Time.deltaTime / 6f;
         DistanceText.SetText(Math.Round(Distance, 2) +" Km");
+
+        // update enemy presence
+        
 
     }
 
