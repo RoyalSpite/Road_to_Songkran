@@ -126,6 +126,7 @@ public class Player : MonoBehaviour
 
     void Shoot(){
 
+        FindObjectOfType<PlayerSoundManager>().PlayShootSound();
         // สร้างกระสุน
         projectilesList[bulletIndex].SetActive(true);
         projectilesList[bulletIndex].transform.position = firePoint.position;

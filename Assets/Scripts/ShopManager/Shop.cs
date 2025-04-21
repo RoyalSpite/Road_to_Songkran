@@ -15,7 +15,7 @@ public class Shop : MonoBehaviour
 
     private void Start()
     {
-        shopUI.SetActive(false);
+        //shopUI.SetActive(false);
 
         // ผูกปุ่ม
         foreach (Button btn in itemButtons)
