@@ -15,7 +15,7 @@ public class Shop : MonoBehaviour
 
     private void Start()
     {
-        //shopUI.SetActive(false);
+        shopUI.SetActive(false);
 
         // ผูกปุ่ม
         foreach (Button btn in itemButtons)
@@ -70,12 +70,4 @@ public class Shop : MonoBehaviour
         Time.timeScale = 1f; // เล่นเกมต่อ
     }
 
-
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.CompareTag("Player"))
-        {
-            Debug.Log("Open Shop");
-        }
-    }
 }
