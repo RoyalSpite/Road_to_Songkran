@@ -15,6 +15,8 @@ public class Enemy02 : EnemyBase{
     // Update is called once per frame
     new void Update(){
 
+        base.Update();
+
         if (player != null){
             
             if(inRange){
@@ -26,7 +28,7 @@ public class Enemy02 : EnemyBase{
             }
             else{
                 Vector3 direction = (player.position - transform.position).normalized;
-                transform.Translate(direction * moveSpeed * Time.deltaTime);
+                transform.Translate(moveSpeed * Time.deltaTime * direction);
             }
 
             
@@ -37,14 +39,6 @@ public class Enemy02 : EnemyBase{
         gameObject.GetComponent<Animator>().SetBool("isPlayerUpper",
             player.transform.position.y > transform.position.y
         );
-
-
-        if (health <= 0){   
-            // print("Enemy Destroyed");
-            gameManager.GetScore(enemyScore);
-            //Destroy(gameObject);
-            gameObject.SetActive(false);
-        }
 
         coolDown += Time.deltaTime;
     }

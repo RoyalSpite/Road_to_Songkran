@@ -119,6 +119,11 @@ public class Player : MonoBehaviour
 
         // game over
         if(health <= 0){
+            Child.SetActive(false);
+            GetComponent<Animator>().SetBool("isDestroyed", true);
+            transform.Find("ExplosionAnim").
+                gameObject.GetComponent<Animator>().SetBool("isDestroyed", true);
+
             Time.timeScale = 0;
         }
 
