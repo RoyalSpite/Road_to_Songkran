@@ -21,6 +21,8 @@ public class Enemy01 : EnemyBase{
 
         base.Update();
 
+        if(GameManager.isGameOver) return;
+
         if (player != null){
 
             
@@ -29,7 +31,7 @@ public class Enemy01 : EnemyBase{
                 Vector3 direction = (FirePosition - transform.position).normalized;
                 transform.Translate(direction * moveSpeed * Time.deltaTime);
 
-                if(Mathf.Abs(FirePosition.y - transform.position.y) <= 0.0025f){
+                if(Vector2.Distance(FirePosition,transform.position) <= 0.025f){
                     transform.position = FirePosition;
                     inRange = true;
                 }

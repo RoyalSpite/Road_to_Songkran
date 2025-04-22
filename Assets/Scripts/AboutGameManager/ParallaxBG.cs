@@ -17,6 +17,7 @@ public class ParallaxBG : MonoBehaviour
 
     void Update()
     {
+        if(GameManager.isGameOver) return;
         transform.Translate(
             Vector3.left * scrollSpeed * Time.deltaTime
         );
