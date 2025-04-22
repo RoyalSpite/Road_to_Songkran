@@ -6,8 +6,10 @@ public class Boss : MonoBehaviour
 {
     [Header("Movement")]
     public float moveCooldown = 2f;
+    public float moveSpeed = 5f;
     private float moveTimer;
     private int currentLane = 1;
+    private Transform targetLane;
 
     [Header("Shooting")]
     public float shootCooldown = 1.5f;
