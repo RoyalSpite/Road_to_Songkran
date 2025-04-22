@@ -91,9 +91,21 @@ public class Boss : MonoBehaviour
     {
         foreach (int lane in lanes)
         {
-            if (lane >= 1 && lane <= 4)
+            // Spawn กระสุน
+            GameObject bullet = Instantiate(bulletPrefab, lanePositions[lane - 1].position, Quaternion.identity);
+
+            // กำหนดทิศทางให้กระสุน (ไปทางซ้าย)
+            Vector2 direction = Vector2.left;
+
+            // หมุนกระสุนให้หันไปตามทิศทาง
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            bullet.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+
+            // ส่งทิศทางให้กระสุน (ถ้ากระสุนมีสคริปต์ควบคุมการเคลื่อนที่)
+            Projectile bulletController = bullet.GetComponent<Projectile>();
+            if (bulletController != null)
             {
-                Instantiate(bulletPrefab, lanePositions[lane - 1].position, Quaternion.identity);
+                bulletController.SetDirection(direction);
             }
         }
     }
