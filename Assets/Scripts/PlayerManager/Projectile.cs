@@ -22,6 +22,12 @@ public class Projectile : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(gameObject.CompareTag("Bullet") && other.CompareTag("Enemy")){
+            if(other.gameObject.GetComponent<EnemyBase>().health <= 0){
+                return;
+            }
+            other.gameObject.GetComponent<EnemyBase>().SetCollidedPos(
+                (transform.position - other.gameObject.transform.position).normalized
+            );
             other.gameObject.GetComponent<EnemyBase>().health -= 1;
             OnBecameInvisible();
         }

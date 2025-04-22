@@ -19,6 +19,8 @@ public class Enemy01 : EnemyBase{
     // Update is called once per frame
     new void Update(){
 
+        base.Update();
+
         if (player != null){
 
             
@@ -50,14 +52,6 @@ public class Enemy01 : EnemyBase{
             player.transform.position.y > transform.position.y
         );
 
-
-        if (health <= 0){   
-            // print("Enemy Destroyed");
-            gameManager.GetScore(enemyScore);
-            //Destroy(gameObject);
-            gameObject.SetActive(false);
-        }
-
         coolDown += Time.deltaTime;
     }
 
@@ -79,7 +73,7 @@ public class Enemy01 : EnemyBase{
 
     public void Spawn(Vector3 TargetFirePosition){
         
-        base.Spawn();
+        Spawn();
 
         FirePosition = TargetFirePosition;
         FirePosition.x = Random.Range(-8f, 8f);

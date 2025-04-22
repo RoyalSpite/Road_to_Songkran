@@ -16,6 +16,10 @@ public class EnemyBase : MonoBehaviour
 
     protected Transform player;
 
+    private Vector3 CollidedDir;
+    protected float fadeOutCountDown = 0f;
+    protected float fadeOutTimeMult = 2;
+
     protected void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
@@ -26,17 +30,22 @@ public class EnemyBase : MonoBehaviour
 
     protected void Update()
     {
-        if (player != null)
-        {
-            Vector3 direction = (player.position - transform.position).normalized;
-            transform.Translate(direction * moveSpeed * Time.deltaTime);
-        }
 
-        if (health <= 0)
-        {   
-            // print("Enemy Destroyed");
-            gameManager.GetScore(enemyScore);
-            Destroy(gameObject);
+        if (health <= 0){   
+            
+            Color tmpColor = gameObject.GetComponent<SpriteRenderer>().color;
+            transform.Translate(4 * Time.deltaTime * -CollidedDir);
+
+            if(tmpColor.a > 0f){
+                tmpColor.a -= Time.deltaTime * fadeOutTimeMult;
+                gameObject.GetComponent<SpriteRenderer>().color = tmpColor;
+            }
+            else{ 
+                gameManager.GetScore(enemyScore);
+                gameObject.SetActive(false);
+            }
+
+            return;
         }
 
     }
@@ -44,6 +53,10 @@ public class EnemyBase : MonoBehaviour
     protected void Spawn(){
         health = baseHealth;
         inRange = false;
+        gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+    }
 
+    public void SetCollidedPos(Vector3 Collide){
+        CollidedDir = Collide;
     }
 }

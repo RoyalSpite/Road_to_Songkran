@@ -9,8 +9,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private GameObject[] Enemies01Pool;
     [SerializeField] private GameObject[] Enemies02Pool;
 
-    private int maxEnemy01 = 3;
-    private int maxEnemy02 = 3;
+    [SerializeField] private int maxEnemy01 = 3;
+    [SerializeField] private int maxEnemy02 = 3;
 
     [SerializeField] private Transform UpperLane;
     [SerializeField] private Transform LowerLane;
