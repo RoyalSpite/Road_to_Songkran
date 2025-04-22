@@ -13,9 +13,11 @@ public class Shop : MonoBehaviour
     [Header("Player")]
     public Player player; // อ้างอิง Player
 
+    public AudioSource audioSorce;
+
     private void Start()
     {
-        shopUI.SetActive(false);
+        //shopUI.SetActive(false);
 
         // ผูกปุ่ม
         foreach (Button btn in itemButtons)
@@ -37,14 +39,17 @@ public class Shop : MonoBehaviour
         {
             case 0:
                 player.health = Mathf.Min(player.fullHealth, player.health + 30);
+                audioSorce.Play();
                 break;
             case 1:
                 player.carSpeedMultiplier += 0.5f;
                 player.speedCountDown = 10f; // Speed up 10 วิ
+                audioSorce.Play();
                 break;
             case 2:
                 player.scoreMultiplier += 1;
                 player.scoreCountDown = 15f; // Score up 15 วิ
+                audioSorce.Play();
                 break;
         }
 
