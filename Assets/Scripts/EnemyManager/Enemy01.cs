@@ -8,7 +8,8 @@ public class Enemy01 : EnemyBase{
     private int bulletIndex = 0;
     private readonly float baseCoolDown = 1.75f;
     private float coolDown = 0;
-    private bool inRange = false;
+
+    private Vector3 FirePosition;
 
     // Start is called before the first frame update
     new void Start(){
@@ -20,12 +21,16 @@ public class Enemy01 : EnemyBase{
 
         if (player != null){
 
-            inRange = Vector2.Distance(player.position, transform.position) <= 6;
-
+            
             if(!inRange){
 
-                Vector3 direction = (player.position - transform.position).normalized;
+                Vector3 direction = (FirePosition - transform.position).normalized;
                 transform.Translate(direction * moveSpeed * Time.deltaTime);
+
+                if(Mathf.Abs(FirePosition.y - transform.position.y) <= 0.0025f){
+                    transform.position = FirePosition;
+                    inRange = true;
+                }
 
             }
             else{
@@ -69,6 +74,22 @@ public class Enemy01 : EnemyBase{
         ProjectilesPool[bulletIndex].GetComponent<Projectile>().SetDirection(direction);
 
         bulletIndex = (bulletIndex + 1 == ProjectilesPool.Length) ? 0 : bulletIndex + 1;
+
+    }
+
+    public void Spawn(Vector3 TargetFirePosition){
+        
+        base.Spawn();
+
+        FirePosition = TargetFirePosition;
+        FirePosition.x = Random.Range(-8f, 8f);
+
+        int YMagnitude = (FirePosition.y < 0)? -1 : 1;
+
+        transform.position = new Vector3(
+            FirePosition.x,
+            YMagnitude * 5
+        );
 
     }
 }

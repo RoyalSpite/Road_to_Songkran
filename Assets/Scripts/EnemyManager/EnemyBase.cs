@@ -9,13 +9,17 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] protected int enemyScore;
     protected GameManager gameManager;
 
-    [SerializeField] public int health = 1;
+    protected int baseHealth = 1;
+    [SerializeField] public int health;
+
+    protected bool inRange;
+
     protected Transform player;
 
     protected void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
-
+        health = baseHealth;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
     }
@@ -37,11 +41,9 @@ public class EnemyBase : MonoBehaviour
 
     }
 
-    public void SetPosition(Vector3 pos){
-        transform.position = pos;
-    }
+    protected void Spawn(){
+        health = baseHealth;
+        inRange = false;
 
-    void OnBecameVisible(){
-        
     }
 }

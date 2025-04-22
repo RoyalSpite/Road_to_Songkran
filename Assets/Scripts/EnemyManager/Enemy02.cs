@@ -4,11 +4,8 @@ public class Enemy02 : EnemyBase{
 
     [SerializeField] private Transform fireOrigin;
 
-    [SerializeField] GameObject[] ProjectilesPool;
-    private int bulletIndex = 0;
     private readonly float baseCoolDown = 1f;
     private float coolDown = 0;
-    private bool inRange = false;
 
     // Start is called before the first frame update
     new void Start(){
@@ -19,12 +16,6 @@ public class Enemy02 : EnemyBase{
     new void Update(){
 
         if (player != null){
-
-            
-
-            Vector3 direction = (player.position - transform.position).normalized;
-            transform.Translate(direction * moveSpeed * Time.deltaTime);
-
             
             if(inRange){
                 if(coolDown >= baseCoolDown){
@@ -32,6 +23,10 @@ public class Enemy02 : EnemyBase{
                     coolDown = 0;
                     Fire();
                 }
+            }
+            else{
+                Vector3 direction = (player.position - transform.position).normalized;
+                transform.Translate(direction * moveSpeed * Time.deltaTime);
             }
 
             
@@ -69,5 +64,10 @@ public class Enemy02 : EnemyBase{
 
     private void Fire(){
         player.GetComponent<Player>().health -= 2;
+    }
+
+    public void Spawn(Vector3 initPos){
+        Spawn();
+        gameObject.transform.position = initPos;
     }
 }
