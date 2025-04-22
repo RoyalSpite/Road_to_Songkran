@@ -6,8 +6,10 @@ public class GameManager : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] private Player player;
-    [SerializeField] private Transform[] roadPosition;
+    [SerializeField] private EnemySpawner enemySpawner;
 
+    [SerializeField] private Transform[] roadPosition;
+    
     [SerializeField] private GameObject fuelGaugeNeedle;
     private readonly float guageAngle = 40f;
 
@@ -22,7 +24,11 @@ public class GameManager : MonoBehaviour
     public int Score = 0;
     public float Distance = 0f;
 
+    public float time = 0f;
+
     public static float gameProgressModifier = 1f;
+
+    public static bool isGameOver = false;
 
     void Start(){
         player.transform.position = roadPosition[laneIndex].position;
@@ -32,6 +38,10 @@ public class GameManager : MonoBehaviour
     void Update(){
 
         // FuelText.SetText("HP : " + player.health);
+        if(isGameOver){
+            gameProgressModifier = 0;
+            return;
+        }
         
         // player movement
         if(player.target == Vector3.zero){
@@ -69,9 +79,28 @@ public class GameManager : MonoBehaviour
         Distance += Time.deltaTime / 6f;
         DistanceText.SetText(Math.Round(Distance, 2) +" Km");
 
-        // update enemy presence
+        if(Distance >= 90){
+            // BOSS IMCOMING
+            enemySpawner.maxEnemy01 = 0;
+            enemySpawner.maxEnemy02 = 0;
+        }
+        else if(Distance >= 70){
+            enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length;
+            enemySpawner.maxEnemy02 = enemySpawner.Enemies02Pool.Length;
+        }
+        else if(Distance >= 54){
+            enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length / 2;
+            enemySpawner.maxEnemy02 = enemySpawner.Enemies02Pool.Length / 2;
+        }
+        else if(Distance >= 36){
+            enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length / 3;
+            enemySpawner.maxEnemy02 = enemySpawner.Enemies02Pool.Length / 3;
+        }
+        else if(Distance >= 15){
+            enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length / 4;
+            enemySpawner.maxEnemy02 = enemySpawner.Enemies02Pool.Length / 4;
+        }
         
-
     }
 
     public void GetScore(int enemyScore){

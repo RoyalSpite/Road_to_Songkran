@@ -6,11 +6,11 @@ using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject[] Enemies01Pool;
-    [SerializeField] private GameObject[] Enemies02Pool;
+    [SerializeField] public GameObject[] Enemies01Pool;
+    [SerializeField] public GameObject[] Enemies02Pool;
 
-    [SerializeField] private int maxEnemy01 = 3;
-    [SerializeField] private int maxEnemy02 = 3;
+    [SerializeField] public int maxEnemy01 = 3;
+    [SerializeField] public int maxEnemy02 = 3;
 
     [SerializeField] private Transform UpperLane;
     [SerializeField] private Transform LowerLane;
@@ -32,10 +32,16 @@ public class EnemySpawner : MonoBehaviour
         Enemy01SpawnTime = new int[Enemies01Pool.Length];
         Enemy02SpawnTime = new int[Enemies02Pool.Length];
 
+        maxEnemy01 = Enemies01Pool.Length / 5;
+        maxEnemy02 = Enemies02Pool.Length / 5;
+
     }
 
     // Update is called once per frame
     void Update(){
+
+        if(GameManager.isGameOver) return;
+
         countDown += Time.deltaTime;
 
         TimeToSpawn = Mathf.RoundToInt(countDown * 10);
@@ -72,12 +78,16 @@ public class EnemySpawner : MonoBehaviour
     }
 
     void SetSpawnTime(){
-        for(int i=0; i< Enemy01SpawnTime.Length ; i++){
-            Enemy01SpawnTime[i] = Mathf.RoundToInt(Random.Range(0f, 1) * 10) ;
+        if(maxEnemy01 > 0){
+            for(int i=0; i< Enemy01SpawnTime.Length ; i++){
+                Enemy01SpawnTime[i] = Mathf.RoundToInt(Random.Range(0f, 1) * 10) ;
+            }
         }
 
-        for(int i=0; i< Enemy02SpawnTime.Length ; i++){
-            Enemy02SpawnTime[i] = Mathf.RoundToInt(Random.Range(0f, 1) * 10) ;
+        if(maxEnemy02 > 0){
+            for(int i=0; i< Enemy02SpawnTime.Length ; i++){
+                Enemy02SpawnTime[i] = Mathf.RoundToInt(Random.Range(0f, 1) * 10) ;
+            }
         }
 
     }

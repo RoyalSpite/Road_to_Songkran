@@ -15,6 +15,8 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
+        if(GameManager.isGameOver) return;
+
         transform.Translate(moveDirection * speed * Time.deltaTime, Space.World);
 
     }

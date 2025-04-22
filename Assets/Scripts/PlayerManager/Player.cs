@@ -43,8 +43,23 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update(){
+
+        // game over
+        if(GameManager.isGameOver) return;
+
+        if(health <= 0){
+            Child.SetActive(false);
+            GetComponent<Animator>().SetBool("isDestroyed", true);
+            transform.Find("ExplosionAnim").
+                gameObject.GetComponent<Animator>().SetBool("isDestroyed", true);
+
+            GameManager.isGameOver = true;
+            return;
+            // Time.timeScale = 0;
+        }
+
+
         // Update Mouse Position
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0f;
@@ -116,17 +131,6 @@ public class Player : MonoBehaviour
             }
 
         }
-
-        // game over
-        if(health <= 0){
-            Child.SetActive(false);
-            GetComponent<Animator>().SetBool("isDestroyed", true);
-            transform.Find("ExplosionAnim").
-                gameObject.GetComponent<Animator>().SetBool("isDestroyed", true);
-
-            Time.timeScale = 0;
-        }
-
     }
 
     void Shoot(){

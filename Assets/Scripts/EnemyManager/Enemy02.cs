@@ -17,6 +17,8 @@ public class Enemy02 : EnemyBase{
 
         base.Update();
 
+        if(GameManager.isGameOver) return;
+        
         if (player != null){
             
             if(inRange){
