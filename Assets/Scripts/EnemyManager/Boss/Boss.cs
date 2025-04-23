@@ -22,17 +22,46 @@ public class Boss : MonoBehaviour
     [Header("Lane Settings")]
     public float laneHeight = 2f; // ระยะห่างแนวตั้งระหว่างเลน
 
+     [Header("Intro Movement")]
+    public Vector3 entryTargetPosition; // จุดที่บอสจะเคลื่อนมาถึงก่อนเริ่มโจมตี
+    public float entrySpeed = 3f; // ความเร็วช่วงเข้า
+
+    private bool hasEntered = false; // เข้าไปจุดกลางจอแล้วหรือยัง
+
+
     private void Start()
     {
         moveTimer = moveCooldown;
         shootTimer = shootCooldown;
         currentLane = 2; // เริ่มที่เลน 2 (จะได้ขยับขึ้นหรือลงได้)
+
+        if (entryTargetPosition == Vector3.zero)
+        {
+            entryTargetPosition = new Vector3(6f, transform.position.y, 0f); // ปรับตำแหน่งตามที่ต้องการ
+        }
     }
 
     private void Update()
     {
-        HandleMovement();
-        HandleShooting();
+        if (!hasEntered)
+        {
+            MoveToEntryPoint();
+        }
+        else
+        {
+            HandleMovement();
+            HandleShooting();
+        }
+    }
+
+    private void MoveToEntryPoint()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, entryTargetPosition, entrySpeed * Time.deltaTime);
+
+        if (Vector3.Distance(transform.position, entryTargetPosition) < 0.01f)
+        {
+            hasEntered = true;
+        }
     }
 
     private void HandleMovement()
@@ -53,10 +82,24 @@ public class Boss : MonoBehaviour
             currentLane = newLane;
 
             // ย้ายตำแหน่งตามเลน
-            Vector3 newPosition = transform.position;
-            newPosition.y = lanePositions[currentLane - 1].position.y;
-            transform.position = newPosition;
+            StartCoroutine(SmoothMoveToLane(lanePositions[currentLane - 1].position.y));
         }
+    }
+
+    private IEnumerator SmoothMoveToLane(float targetY)
+    {
+        float elapsed = 0f;
+        Vector3 startPos = transform.position;
+        Vector3 targetPos = new Vector3(transform.position.x, targetY, transform.position.z);
+
+        while (elapsed < 0.2f)
+        {
+            transform.position = Vector3.Lerp(startPos, targetPos, elapsed / 0.2f);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = targetPos;
     }
 
     private void HandleShooting()
