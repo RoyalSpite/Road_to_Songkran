@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Shop : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class Shop : MonoBehaviour
     public GameObject shopUI; // หน้าร้านค้า
     public Button[] itemButtons; // ปุ่มสำหรับไอเทม 3 ชิ้น
     public Button continueButton; // ปุ่ม Continue
+    private int point;
+    [SerializeField] private TextMeshProUGUI playerPointText;
+    private GameManager gameManager;
 
     [Header("Player")]
     public Player player; // อ้างอิง Player
@@ -20,7 +24,7 @@ public class Shop : MonoBehaviour
     private void Start()
     {
         shopUI.SetActive(false);
-
+        gameManager = FindObjectOfType<GameManager>();
         // ผูกปุ่ม
         foreach (Button btn in itemButtons)
         {
@@ -60,6 +64,9 @@ public class Shop : MonoBehaviour
     public void OpenShop()
     {
         shopUI.SetActive(true);
+        point = gameManager.Score;
+
+        playerPointText.text = "Point : " + point;
         //Time.timeScale = 0f; // หยุดเกม
 
         // เปิดปุ่มทั้งหมดอีกครั้ง
