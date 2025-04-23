@@ -10,7 +10,7 @@ public class EnemyBase : MonoBehaviour
     protected GameManager gameManager;
 
     protected int baseHealth = 1;
-    [SerializeField] public int health;
+    [SerializeField] public float health;
 
     protected bool inRange;
 
@@ -62,13 +62,13 @@ public class EnemyBase : MonoBehaviour
     }
 
     protected void Spawn(){
-        health = baseHealth;
+        health = baseHealth * GameManager.gameProgressModifier;
         inRange = false;
         gameObject.GetComponent<SpriteRenderer>().color = Color.white;
     }
 
-    public void Hit(){
-        health -= 1;
+    public void Hit(float Damage){
+        health -= Damage;
         HitCountDown = 0f;
         HitMark.SetActive(true);
     }

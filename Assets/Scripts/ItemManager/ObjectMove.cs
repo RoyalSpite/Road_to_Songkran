@@ -13,6 +13,8 @@ public class ObjectMove : MonoBehaviour
 
     void Update()
     {
+        if(GameManager.isGameOver) return;
+        
         transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
     }
 

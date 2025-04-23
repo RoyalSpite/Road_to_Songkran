@@ -20,6 +20,8 @@ public class Spawner : MonoBehaviour
 
     void SpawnObject()
     {
+        if(GameManager.isGameOver) return;
+
         GameObject prefabToSpawn = GetRandomPrefab();
         Transform spawnPoint = GetRandomSpawnPoint();
 

@@ -4,6 +4,7 @@ public class Projectile : MonoBehaviour
 {
     public float speed = 15f;
     private Vector3 moveDirection;
+    [SerializeField] private float Damage;
 
     public void SetDirection(Vector3 dir)
     {
@@ -27,11 +28,11 @@ public class Projectile : MonoBehaviour
             if(other.gameObject.GetComponent<EnemyBase>().health <= 0){
                 return;
             }
-            other.gameObject.GetComponent<EnemyBase>().Hit();
+            other.gameObject.GetComponent<EnemyBase>().Hit(Damage);
             OnBecameInvisible();
         }
         else if(gameObject.CompareTag("EnemyBullet") && other.CompareTag("Player")){
-            other.gameObject.GetComponent<Player>().health -= 2.5f;
+            other.gameObject.GetComponent<Player>().health -= Damage;
             OnBecameInvisible();
         }
     }
@@ -39,5 +40,9 @@ public class Projectile : MonoBehaviour
     void OnBecameInvisible(){
         // print("out of screen");
         gameObject.SetActive(false);
+    }
+
+    public void SetDamage(float dam){
+        Damage = dam;
     }
 }
