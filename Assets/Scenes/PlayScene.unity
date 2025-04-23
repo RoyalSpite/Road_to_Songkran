@@ -3428,7 +3428,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1988345284}
-  enemySpawner: {fileID: 0}
+  enemySpawner: {fileID: 352378664}
   roadPosition:
   - {fileID: 1429495585}
   - {fileID: 1022231063}

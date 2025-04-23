@@ -83,6 +83,7 @@ public class GameManager : MonoBehaviour
         Distance += Time.deltaTime * player.carSpeedMultiplier / 6f ;
         DistanceText.SetText(Math.Round(Distance, 2) +" Km");
 
+        // enemy progress
         if(Distance >= 90){
             // BOSS IMCOMING
             enemySpawner.maxEnemy01 = 0;
@@ -103,6 +104,13 @@ public class GameManager : MonoBehaviour
         else if(Distance >= 15){
             enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length / 4;
             enemySpawner.maxEnemy02 = enemySpawner.Enemies02Pool.Length / 4;
+        }
+        else if(Distance >= 3){
+            enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length / 5;
+        }
+
+        if(Distance >= 50){
+            gameProgressModifier = 2f;
         }
         
     }

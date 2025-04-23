@@ -62,7 +62,7 @@ public class EnemyBase : MonoBehaviour
     }
 
     protected void Spawn(){
-        health = baseHealth;
+        health = baseHealth * GameManager.gameProgressModifier;
         inRange = false;
         gameObject.GetComponent<SpriteRenderer>().color = Color.white;
     }

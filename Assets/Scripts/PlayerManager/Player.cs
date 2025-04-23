@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     [Header("Health")]
     [SerializeField] public readonly int fullHealth = 100;
     [SerializeField] public float health;
-    private bool isDamageTakenFromObstacle = false;
+
     private float DamageTakenVisualCountDown = 0;
 
     [SerializeField] private float moveSpeed = 15f;
@@ -258,7 +258,6 @@ public class Player : MonoBehaviour
     }
 
     public void TakeDamageFromObstacle(){
-        isDamageTakenFromObstacle = true;
         DamageTakenVisualCountDown = 0.35f;
     }
     

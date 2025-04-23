@@ -21,7 +21,9 @@ public class EnemySpawner : MonoBehaviour
 
     private float countDown = 0;
 
-    [SerializeField] int TimeToSpawn;
+    [SerializeField] int TimeToSpawn01;
+    [SerializeField] int TimeToSpawn02;
+
 
     private float SpawnThreshold = 1.25f;
 
@@ -32,8 +34,13 @@ public class EnemySpawner : MonoBehaviour
         Enemy01SpawnTime = new int[Enemies01Pool.Length];
         Enemy02SpawnTime = new int[Enemies02Pool.Length];
 
-        maxEnemy01 = Enemies01Pool.Length / 5;
+        maxEnemy01 = 0;
         maxEnemy02 = Enemies02Pool.Length / 5;
+
+        for(int i = 0 ; i < Enemy01SpawnTime.Length ; i ++){
+            Enemy01SpawnTime[i] = i;
+        }
+
 
     }
 
@@ -44,20 +51,22 @@ public class EnemySpawner : MonoBehaviour
 
         countDown += Time.deltaTime;
 
-        TimeToSpawn = Mathf.RoundToInt(countDown * 10);
+        TimeToSpawn01 = Mathf.RoundToInt(countDown * 2 * 10);
         for(int i = 0 ; i < maxEnemy01 ; i++){
-            if(TimeToSpawn == Enemy01SpawnTime[i]){
+            if(TimeToSpawn01 == Enemy01SpawnTime[i]){
                 if(!Enemies01Pool[i].activeSelf){
                     Enemies01Pool[i].SetActive(true);
+                    
                     Enemies01Pool[i].GetComponent<Enemy01>().Spawn(
-                        (Random.Range(0f, 1f) < 0.5)? UpperLane.position : LowerLane.position
+                        (TimeToSpawn01 < 10)? UpperLane.position : LowerLane.position
                     );
                 }
             }
         }
 
+        TimeToSpawn02 = Mathf.RoundToInt(countDown * 10);
         for(int i = 0 ; i < maxEnemy02 ; i++){
-            if(TimeToSpawn == Enemy02SpawnTime[i]){
+            if(TimeToSpawn02 == Enemy02SpawnTime[i]){
                 if(!Enemies02Pool[i].activeSelf){
                     Enemies02Pool[i].SetActive(true);
                     Enemies02Pool[i].GetComponent<Enemy02>().Spawn(
@@ -78,11 +87,14 @@ public class EnemySpawner : MonoBehaviour
     }
 
     void SetSpawnTime(){
-        if(maxEnemy01 > 0){
-            for(int i=0; i< Enemy01SpawnTime.Length ; i++){
-                Enemy01SpawnTime[i] = Mathf.RoundToInt(Random.Range(0f, 1) * 10) ;
-            }
+
+        for (int t = 0; t < Enemy01SpawnTime.Length; t++ ){
+            int tmp = Enemy01SpawnTime[t];
+            int r = Random.Range(t, Enemy01SpawnTime.Length);
+            Enemy01SpawnTime[t] = Enemy01SpawnTime[r];
+            Enemy01SpawnTime[r] = tmp;
         }
+        
 
         if(maxEnemy02 > 0){
             for(int i=0; i< Enemy02SpawnTime.Length ; i++){
