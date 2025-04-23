@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5383253741094763586}
   - component: {fileID: 6443051866911603707}
-  - component: {fileID: 3826534424638655483}
+  - component: {fileID: 856393303522554129}
   - component: {fileID: 7326602580362688314}
   m_Layer: 0
   m_Name: Shop
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 677126189342281911}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.47353446, y: -1.5634744, z: 0}
+  m_LocalPosition: {x: -330.28763, y: -1.5634744, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -86,7 +86,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3826534424638655483
+--- !u!114 &856393303522554129
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,10 +95,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 677126189342281911}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b6a507accd456a40933028561f5eeb7, type: 3}
+  m_Script: {fileID: 11500000, guid: 73ae778686a719c449b10ba2351b81ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  shopUI: {fileID: 0}
+  transitionPanel: {fileID: 0}
 --- !u!61 &7326602580362688314
 BoxCollider2D:
   m_ObjectHideFlags: 0

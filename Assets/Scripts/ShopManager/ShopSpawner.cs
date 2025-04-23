@@ -7,6 +7,7 @@ public class ShopSpawner : MonoBehaviour
     [Header("Prefabs")]
     public GameObject shopSignPrefab;
     public GameObject shopPrefab;
+    [SerializeField]private ObjectMove mover;
 
     [Header("Spawn Settings")]
     public Transform spawnPoint; // จุด spawn ของทั้ง Sign และ Shop
@@ -15,19 +16,21 @@ public class ShopSpawner : MonoBehaviour
 
     private bool signSpawned = false;
     private bool shopSpawned = false;
+    private bool isShopMoving = false; // <<< เพิ่มตัวนี้
 
-    // ระยะที่ต้อง Spawn (ตั้งแบบกำหนดตายตัว)
     private float signSpawnDistance = 0.5f; // 0.5 กิโลเมตร หรือ 500 หน่วย
-    private float shopSpawnDistance = 1f; // 0.7 กิโลเมตร หรือ 700 หน่วย
+    private float shopSpawnDistance = 1f; // 1 กิโลเมตร หรือ 1000 หน่วย
+
+    public float shopMoveSpeed = 5f; // ความเร็วในการเลื่อน
 
     void Start()
     {
-        gameManager = FindObjectOfType<GameManager>(); // หา DistanceCounter ในฉาก
+        gameManager = FindObjectOfType<GameManager>(); 
     }
 
     void Update()
     {
-        float currentDistance = gameManager.Distance; // สมมุติมีฟังก์ชัน GetDistance()
+        float currentDistance = gameManager.Distance; 
 
         if (!signSpawned && currentDistance >= signSpawnDistance)
         {
@@ -37,8 +40,17 @@ public class ShopSpawner : MonoBehaviour
 
         if (!shopSpawned && currentDistance >= shopSpawnDistance)
         {
-            SpawnShop();
+
+            mover.enabled = true;
+            
+            isShopMoving = true;
             shopSpawned = true;
+            Debug.Log("Spawned Shop at distance: " + shopSpawnDistance);
+        }
+
+        if (isShopMoving && shopPrefab != null)
+        {
+            shopPrefab.transform.Translate(Vector3.left * shopMoveSpeed * Time.deltaTime);
         }
     }
 
@@ -51,6 +63,7 @@ public class ShopSpawner : MonoBehaviour
     private void SpawnShop()
     {
         Instantiate(shopPrefab, spawnPoint.position, Quaternion.identity);
+        isShopMoving = true; // <<< ให้เริ่มขยับใน Update
         Debug.Log("Spawned Shop at distance: " + shopSpawnDistance);
     }
 }

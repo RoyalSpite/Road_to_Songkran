@@ -14,18 +14,18 @@ public class Shop : MonoBehaviour
     public Player player; // อ้างอิง Player
 
     public AudioSource audioSorce;
+    public GameObject shopTrigger;
+    public ShopTrigger trigger;
 
     private void Start()
     {
-        //shopUI.SetActive(false);
+        shopUI.SetActive(false);
 
         // ผูกปุ่ม
         foreach (Button btn in itemButtons)
         {
             btn.onClick.AddListener(() => PurchaseItem(btn));
         }
-
-        continueButton.onClick.AddListener(CloseShop);
     }
 
     private void PurchaseItem(Button clickedButton)
@@ -60,19 +60,13 @@ public class Shop : MonoBehaviour
     public void OpenShop()
     {
         shopUI.SetActive(true);
-        Time.timeScale = 0f; // หยุดเกม
+        //Time.timeScale = 0f; // หยุดเกม
 
         // เปิดปุ่มทั้งหมดอีกครั้ง
         foreach (Button btn in itemButtons)
         {
             btn.interactable = true;
         }
-    }
-
-    public void CloseShop()
-    {
-        shopUI.SetActive(false);
-        Time.timeScale = 1f; // เล่นเกมต่อ
     }
 
 }
