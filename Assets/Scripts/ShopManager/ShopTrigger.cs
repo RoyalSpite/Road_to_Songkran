@@ -6,6 +6,7 @@ public class ShopTrigger : MonoBehaviour
 {
     public GameObject shopUI;
     public GameObject transitionPanel;
+    public SpriteBlink blink;
 
     private Animator transitionAnimator;
 
@@ -38,11 +39,14 @@ public class ShopTrigger : MonoBehaviour
         transitionPanel.SetActive(true);
         transitionAnimator.SetTrigger("GoLeft");  // ตั้ง Trigger ใน Animator
 
+        FindObjectOfType<BGMManager>().ChangeShopBGM();
+
         // รอจนกว่าจะบังเต็ม (เวลาตาม Animation ประมาณกลางๆ) เช่น 0.5 วิ
         yield return new WaitForSecondsRealtime(0.5f);
 
         Time.timeScale = 0f;
         shopUI.SetActive(true);
+        blink.enabled = true;
     }
 
     public void ExitShop()
@@ -59,6 +63,7 @@ public class ShopTrigger : MonoBehaviour
 
         Time.timeScale = 1f;
         //transitionPanel.SetActive(false);
+        FindObjectOfType<BGMManager>().ChangeInGameBGM();
         shopUI.SetActive(false);
         isInShop = false;
     }
