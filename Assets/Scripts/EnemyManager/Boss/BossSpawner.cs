@@ -8,7 +8,7 @@ public class BossSpawner : MonoBehaviour
     public float spawnDistance = 2f; // ระยะที่ต้องการให้บอสโผล่ (กิโลเมตรหรือหน่วยอะไรก็ได้)
 
     private GameManager gameManager;
-    private bool bossSpawned = false;
+    public static bool bossSpawned = false;
 
     private void Start()
     {
@@ -23,9 +23,8 @@ public class BossSpawner : MonoBehaviour
 
         float currentDistance = gameManager.Distance;
 
-        if (currentDistance >= spawnDistance)
-        {
-
+        if (currentDistance >= spawnDistance){
+            gameManager.CancelEnemySpawn();
             bossPrefab.SetActive(true); // เปิดบอส
             bossSpawned = true;
         }

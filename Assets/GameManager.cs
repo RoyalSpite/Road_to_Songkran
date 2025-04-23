@@ -84,29 +84,31 @@ public class GameManager : MonoBehaviour
         DistanceText.SetText(Math.Round(Distance, 2) +" Km");
 
         // enemy progress
-        if(Distance >= 90){
-            // BOSS IMCOMING
-            enemySpawner.maxEnemy01 = 0;
-            enemySpawner.maxEnemy02 = 0;
-        }
-        else if(Distance >= 70){
-            enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length;
-            enemySpawner.maxEnemy02 = enemySpawner.Enemies02Pool.Length;
-        }
-        else if(Distance >= 54){
-            enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length / 2;
-            enemySpawner.maxEnemy02 = enemySpawner.Enemies02Pool.Length / 2;
-        }
-        else if(Distance >= 36){
-            enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length / 3;
-            enemySpawner.maxEnemy02 = enemySpawner.Enemies02Pool.Length / 3;
-        }
-        else if(Distance >= 15){
-            enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length / 4;
-            enemySpawner.maxEnemy02 = enemySpawner.Enemies02Pool.Length / 4;
-        }
-        else if(Distance >= 3){
-            enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length / 5;
+        if(!BossSpawner.bossSpawned){
+            if(Distance >= 90){
+                // BOSS IMCOMING
+                enemySpawner.maxEnemy01 = 0;
+                enemySpawner.maxEnemy02 = 0;
+            }
+            else if(Distance >= 70){
+                enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length;
+                enemySpawner.maxEnemy02 = enemySpawner.Enemies02Pool.Length;
+            }
+            else if(Distance >= 54){
+                enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length / 2;
+                enemySpawner.maxEnemy02 = enemySpawner.Enemies02Pool.Length / 2;
+            }
+            else if(Distance >= 36){
+                enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length / 3;
+                enemySpawner.maxEnemy02 = enemySpawner.Enemies02Pool.Length / 3;
+            }
+            else if(Distance >= 15){
+                enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length / 4;
+                enemySpawner.maxEnemy02 = enemySpawner.Enemies02Pool.Length / 4;
+            }
+            else if(Distance >= 3){
+                enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length / 5;
+            }
         }
 
         if(Distance >= 50){
@@ -117,5 +119,10 @@ public class GameManager : MonoBehaviour
 
     public void GetScore(int enemyScore){
         Score += enemyScore * player.scoreMultiplier;
+    }
+
+    public void CancelEnemySpawn(){
+        enemySpawner.maxEnemy01 = 0;
+        enemySpawner.maxEnemy02 = 0;
     }
 }
