@@ -25,10 +25,17 @@ public class Projectile : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(gameObject.CompareTag("Bullet") && other.CompareTag("Enemy")){
-            if(other.gameObject.GetComponent<EnemyBase>().health <= 0){
-                return;
+
+            if(other.CompareTag("Enemy")){
+                if(other.gameObject.GetComponent<EnemyBase>().health <= 0){
+                    return;
+                }
+                other.gameObject.GetComponent<EnemyBase>().Hit(Damage);
             }
-            other.gameObject.GetComponent<EnemyBase>().Hit(Damage);
+            else if(other.CompareTag("Boss")){
+                other.gameObject.GetComponent<Boss>().Hit(Damage);
+            }
+
             OnBecameInvisible();
         }
         else if(gameObject.CompareTag("EnemyBullet") && other.CompareTag("Player")){

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Boss : MonoBehaviour
 {
+    [Header("Health")]
+    public float health = 150f;
+
     [Header("Movement")]
     public float moveCooldown = 2f;
     public float moveSpeed = 5f;
@@ -28,6 +31,13 @@ public class Boss : MonoBehaviour
 
     private bool hasEntered = false; // เข้าไปจุดกลางจอแล้วหรือยัง
 
+    [Header("VisualSprite")]
+    [SerializeField] private Sprite normalSprite; // sprite ปกติ
+    [SerializeField] private Sprite hitSprite; // sprite ขาวล้วน โชว์ว่ายิงโดน
+
+    [Header("HitCountdown")]
+    public float hitTimer = 0f;
+
 
     private void Start()
     {
@@ -51,6 +61,7 @@ public class Boss : MonoBehaviour
         {
             HandleMovement();
             HandleShooting();
+            HandleHit();
         }
     }
 
@@ -153,5 +164,32 @@ public class Boss : MonoBehaviour
                 bulletController.SetDirection(direction);
             }
         }
+    }
+
+    private void HandleHit(){
+
+        if (hitTimer <= 0) return;
+
+        hitTimer -= Time.deltaTime;
+
+        if (hitTimer <= 0){
+            hitTimer = 0f;
+            gameObject.GetComponent<SpriteRenderer>().sprite = normalSprite;
+        }
+        else{
+            gameObject.GetComponent<SpriteRenderer>().sprite = hitSprite;
+        }
+    }
+
+    public void Hit(float Damage){
+        health -= Damage;
+
+        if(health <= 0){
+            // WIN THE GAME
+
+            return;
+        }
+
+        hitTimer = 0.1f;
     }
 }

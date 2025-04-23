@@ -15,7 +15,9 @@ public class ObjectMove : MonoBehaviour
     {
         if(GameManager.isGameOver) return;
         
-        transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
+        transform.Translate(
+            moveSpeed * ParallaxBG.scrollSpeed * Time.deltaTime * Vector3.left
+        );
     }
 
     void OnBecameInvisible()
