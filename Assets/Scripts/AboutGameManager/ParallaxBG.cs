@@ -2,17 +2,11 @@ using UnityEngine;
 
 public class ParallaxBG : MonoBehaviour
 {    
-    public static readonly float baseScrollSpeed = 4f;
+    public static float baseScrollSpeed = 4f;
     public static float scrollSpeed = 4f;
 
     public float resetPositionX = -20f; 
     public float startPositionX = 20f; 
-
-    private Player player;
-
-    private void Start(){
-        player = GameObject.Find("Player").GetComponent<Player>();
-    }
 
     void Update()
     {

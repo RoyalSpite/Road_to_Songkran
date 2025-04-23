@@ -62,6 +62,9 @@ public class GameManager : MonoBehaviour
                 player.target.y = roadPosition[laneIndex].position.y;
                 
             }
+            else if(Input.GetKeyDown(KeyCode.E)){
+                player.UsePowerUP();
+            }
 
         }
 
@@ -77,7 +80,7 @@ public class GameManager : MonoBehaviour
         ScoreText.SetText("Score : "+Score);
 
         // update distance
-        Distance += Time.deltaTime / 6f;
+        Distance += Time.deltaTime * player.carSpeedMultiplier / 6f ;
         DistanceText.SetText(Math.Round(Distance, 2) +" Km");
 
         if(Distance >= 90){

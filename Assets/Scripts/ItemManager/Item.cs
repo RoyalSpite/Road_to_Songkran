@@ -21,6 +21,7 @@ public class Item : MonoBehaviour{
                 case GroundItemType.Barrel:{
                     player.health = Mathf.Max(player.health - 5, 0);
                     Destroy(gameObject);
+                    player.TakeDamageFromObstacle();
                     break;
                 }
                 case GroundItemType.Hole:{
@@ -29,9 +30,10 @@ public class Item : MonoBehaviour{
                     break;
                 }
                 case GroundItemType.StopSign:{
-                    player.health = Mathf.Max(player.health - 10, 0);
+                    player.health = Mathf.Max(player.health - 3, 0);
                     player.carSpeedMultiplier = 0.85f;
                     player.speedCountDown = 3f;
+                    player.TakeDamageFromObstacle();
                     Destroy(gameObject);
                     break;
                 }

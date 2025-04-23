@@ -42,13 +42,13 @@ public class Shop : MonoBehaviour
                 audioSorce.Play();
                 break;
             case 1:
+                player.baseCarSpeedMultiplier += 0.5f;
                 player.carSpeedMultiplier += 0.5f;
-                player.speedCountDown = 10f; // Speed up 10 วิ
                 audioSorce.Play();
                 break;
             case 2:
+                player.baseScoreMultiplier += 1;
                 player.scoreMultiplier += 1;
-                player.scoreCountDown = 15f; // Score up 15 วิ
                 audioSorce.Play();
                 break;
         }
