@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI ScoreText;
     [SerializeField] private TextMeshProUGUI DistanceText;
 
+
     [Header("MovementIndex")]
     [SerializeField] private int laneIndex = 0;
 

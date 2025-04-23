@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -28,18 +29,25 @@ public class Player : MonoBehaviour
     public Transform firePoint;   // จุดที่ยิงกระสุนออกไป
     public float fireRate = 0.2f;  // เวลาหน่วงระหว่างยิงแต่ละครั้ง
     private float fireTimer = 0f;
-
+    
     public bool enemyPresence = false;
 
     private Vector3 mousePosition;
 
     public Vector3 target = Vector3.zero;
 
+    // inventory
+    [Header("Inventory")]
+    GroundItemType pickupItem = GroundItemType.None;
+    [SerializeField] Sprite[] ItemImgs;
+    [SerializeField] float[] PowerUpCountDown;
+    [SerializeField] Image shownPickUp;
+    
+
     void Start(){
         health = fullHealth;
         scoreMultiplier = baseScoreMultiplier;
         carSpeedMultiplier = baseCarSpeedMultiplier;
-
     }
 
     // Update is called once per frame
@@ -136,6 +144,7 @@ public class Player : MonoBehaviour
     void Shoot(){
 
         FindObjectOfType<PlayerSoundManager>().PlayShootSound();
+
         // สร้างกระสุน
         projectilesList[bulletIndex].SetActive(true);
         projectilesList[bulletIndex].transform.position = firePoint.position;
@@ -150,6 +159,52 @@ public class Player : MonoBehaviour
 
         bulletIndex = (bulletIndex + 1 == projectilesList.Length) ? 0 : bulletIndex + 1;
 
+    }
+
+    public bool CanPickUp(){
+        return pickupItem == GroundItemType.None;
+    }
+
+    public void PickUp(GroundItemType pickUp){
+
+        pickupItem = pickUp;
+        shownPickUp.gameObject.SetActive(true);
+
+        // show pickup Item
+        shownPickUp.sprite = ItemImgs[(int)pickupItem];
+        
+    }
+
+    public void UsePowerUP(){
+        if(pickupItem != GroundItemType.None){
+            shownPickUp.gameObject.SetActive(false);
+
+            switch(pickupItem){
+                // for item
+                case GroundItemType.Fuel:{
+                    health = Mathf.Min(
+                        fullHealth, health + 10
+                    );
+                    break;
+                }
+                case GroundItemType.Speed:{
+                    carSpeedMultiplier = 1.25f;
+                    speedCountDown = 3f;
+                    break;
+                }
+                case GroundItemType.Double:{
+                    scoreMultiplier = 2;
+                    scoreCountDown = 3f;
+                    break;
+                }
+                case GroundItemType.Weapon:{
+                    break;
+                }
+            }
+
+            pickupItem = GroundItemType.None;
+                
+        }
     }
     
 }
