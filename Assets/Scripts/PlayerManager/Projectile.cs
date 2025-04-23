@@ -27,10 +27,7 @@ public class Projectile : MonoBehaviour
             if(other.gameObject.GetComponent<EnemyBase>().health <= 0){
                 return;
             }
-            other.gameObject.GetComponent<EnemyBase>().SetCollidedPos(
-                (transform.position - other.gameObject.transform.position).normalized
-            );
-            other.gameObject.GetComponent<EnemyBase>().health -= 1;
+            other.gameObject.GetComponent<EnemyBase>().Hit();
             OnBecameInvisible();
         }
         else if(gameObject.CompareTag("EnemyBullet") && other.CompareTag("Player")){

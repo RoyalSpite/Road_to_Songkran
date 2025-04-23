@@ -16,9 +16,12 @@ public class EnemyBase : MonoBehaviour
 
     protected Transform player;
 
-    private Vector3 CollidedDir;
+    private Vector3 CollidedDir = Vector3.zero;
     protected float fadeOutCountDown = 0f;
     protected float fadeOutTimeMult = 2;
+
+    [SerializeField] GameObject HitMark;
+    private float HitCountDown = -1;
 
     protected void Start()
     {
@@ -30,6 +33,14 @@ public class EnemyBase : MonoBehaviour
 
     protected void Update()
     {
+
+        if(HitCountDown > -1){
+            HitCountDown += Time.deltaTime;
+            if(HitCountDown >= 0.25){
+                HitMark.SetActive(false);
+                HitCountDown = -1;
+            }
+        }
 
         if (health <= 0){   
             
@@ -47,7 +58,7 @@ public class EnemyBase : MonoBehaviour
 
             return;
         }
-
+        
     }
 
     protected void Spawn(){
@@ -56,7 +67,10 @@ public class EnemyBase : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().color = Color.white;
     }
 
-    public void SetCollidedPos(Vector3 Collide){
-        CollidedDir = Collide;
+    public void Hit(){
+        health -= 1;
+        HitCountDown = 0f;
+        HitMark.SetActive(true);
     }
+
 }

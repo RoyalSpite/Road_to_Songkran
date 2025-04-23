@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ParallaxBG : MonoBehaviour
 {
-    public float scrollSpeed = 4f;
+    public static float scrollSpeed = 4f;
     public float resetPositionX = -20f; 
     public float startPositionX = 20f; 
 

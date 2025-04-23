@@ -5,7 +5,6 @@ public class Enemy01 : EnemyBase{
     [SerializeField] private Transform fireOrigin;
 
     [SerializeField] GameObject[] ProjectilesPool;
-    private int bulletIndex = 0;
     private readonly float baseCoolDown = 1.75f;
     private float coolDown = 0;
 
@@ -25,41 +24,38 @@ public class Enemy01 : EnemyBase{
 
         if (player != null){
 
-            
-            if(!inRange){
-
-                Vector3 direction = (FirePosition - transform.position).normalized;
-                transform.Translate(direction * moveSpeed * Time.deltaTime);
-
-                if(Vector2.Distance(FirePosition,transform.position) <= 0.025f){
-                    transform.position = FirePosition;
-                    inRange = true;
+            if(coolDown >= baseCoolDown){
+                // Fire
+                // Check if which projectiles not in use
+                for(int i = 0;i < ProjectilesPool.Length; i++){
+                    if(!ProjectilesPool[i].activeSelf){
+                        coolDown = 0;
+                        Fire(i);
+                        break;
+                    }
                 }
 
             }
-            else{
 
-                if(coolDown >= baseCoolDown){
-                    // Fire
-                    coolDown = 0;
-                    Fire();
-                }
-
-            }
         }
 
         // animation
-        gameObject.GetComponent<Animator>().SetBool("isShooting",inRange);
+        gameObject.GetComponent<Animator>().SetBool("isShooting",true);
         gameObject.GetComponent<Animator>().SetBool("isPlayerUpper",
             player.transform.position.y > transform.position.y
         );
 
         coolDown += Time.deltaTime;
+
+        transform.Translate(
+            Vector3.left * ParallaxBG.scrollSpeed * Time.deltaTime
+        );
+
     }
 
-    void Fire(){
-        ProjectilesPool[bulletIndex].SetActive(true);
-        ProjectilesPool[bulletIndex].transform.position = fireOrigin.position;
+    void Fire(int projIndex){
+        ProjectilesPool[projIndex].SetActive(true);
+        ProjectilesPool[projIndex].transform.position = fireOrigin.position;
 
         // หาทิศทางจาก firePoint ไปที่ตำแหน่งเมาส์
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -67,9 +63,7 @@ public class Enemy01 : EnemyBase{
         Vector3 direction = (player.transform.position - fireOrigin.position).normalized;
 
         // ส่งทิศทางให้กระสุน
-        ProjectilesPool[bulletIndex].GetComponent<Projectile>().SetDirection(direction);
-
-        bulletIndex = (bulletIndex + 1 == ProjectilesPool.Length) ? 0 : bulletIndex + 1;
+        ProjectilesPool[projIndex].GetComponent<Projectile>().SetDirection(direction);
 
     }
 
@@ -77,15 +71,11 @@ public class Enemy01 : EnemyBase{
         
         Spawn();
 
-        FirePosition = TargetFirePosition;
-        FirePosition.x = Random.Range(-8f, 8f);
+        transform.position = TargetFirePosition;
 
-        int YMagnitude = (FirePosition.y < 0)? -1 : 1;
+    }
 
-        transform.position = new Vector3(
-            FirePosition.x,
-            YMagnitude * 5
-        );
-
+    void OnBecameInvisible(){
+        gameObject.SetActive(false);
     }
 }
