@@ -149,6 +149,7 @@ public class Boss : MonoBehaviour
         {
             // Spawn กระสุน
             GameObject bullet = Instantiate(bulletPrefab, lanePositions[lane - 1].position, Quaternion.identity);
+            bullet.tag = "EnemyBullet";
 
             // กำหนดทิศทางให้กระสุน (ไปทางซ้าย)
             Vector2 direction = Vector2.left;
@@ -168,17 +169,18 @@ public class Boss : MonoBehaviour
 
     private void HandleHit(){
 
-        if (hitTimer <= 0) return;
+        // if (hitTimer <= 0) return;
 
-        hitTimer -= Time.deltaTime;
+        // hitTimer -= Time.deltaTime / 60f;
+        // print("Hit");
 
-        if (hitTimer <= 0){
-            hitTimer = 0f;
-            gameObject.GetComponent<SpriteRenderer>().sprite = normalSprite;
-        }
-        else{
-            gameObject.GetComponent<SpriteRenderer>().sprite = hitSprite;
-        }
+        // if (hitTimer <= 0){
+        //     hitTimer = 0f;
+        //     gameObject.GetComponent<SpriteRenderer>().sprite = normalSprite;
+        // }
+        // else{
+        //     gameObject.GetComponent<SpriteRenderer>().sprite = hitSprite;
+        // }
     }
 
     public void Hit(float Damage){
@@ -189,7 +191,5 @@ public class Boss : MonoBehaviour
 
             return;
         }
-
-        hitTimer = 0.1f;
     }
 }
