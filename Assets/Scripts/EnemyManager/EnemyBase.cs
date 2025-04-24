@@ -19,6 +19,8 @@ public class EnemyBase : MonoBehaviour
     private Vector3 CollidedDir = Vector3.zero;
     protected float fadeOutCountDown = 0f;
     protected float fadeOutTimeMult = 2;
+    protected EnemySoundController sound;
+
 
     [SerializeField] GameObject HitMark;
     private float HitCountDown = -1;
@@ -28,7 +30,7 @@ public class EnemyBase : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
         health = baseHealth;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-
+        sound = GetComponent<EnemySoundController>();
     }
 
     protected void Update()
@@ -52,6 +54,7 @@ public class EnemyBase : MonoBehaviour
                 gameObject.GetComponent<SpriteRenderer>().color = tmpColor;
             }
             else{ 
+                sound.PlayHitSound();
                 gameManager.GetScore(enemyScore);
                 gameObject.SetActive(false);
             }
