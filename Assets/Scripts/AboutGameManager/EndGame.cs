@@ -1,11 +1,21 @@
 using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using TMPro;
+
 
 public class EndGame : MonoBehaviour
 {
-    public GameObject transitionPanel;
+    [Header("UI")]
+    [SerializeField] private GameObject transitionPanel;
+    [SerializeField] private GameObject buttonSet;
+    [SerializeField] private TextMeshProUGUI playerPoint;
+    [SerializeField] private TextMeshProUGUI playerDistance;
+
     private Animator transitionAnimator;
+    private Animator fadeAnimation;
+    private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
@@ -14,13 +24,17 @@ public class EndGame : MonoBehaviour
             transitionPanel = GameObject.Find("TransitionPanel");
 
         transitionAnimator = transitionPanel.GetComponent<Animator>();
+        fadeAnimation = GetComponent<Animator>();   
+        gameManager = FindObjectOfType<GameManager>();
+        buttonSet.SetActive(false);
         
         StartCoroutine(DelayBeforeShop());
     }
 
     private IEnumerator DelayBeforeShop()
     {
-        yield return new WaitForSecondsRealtime(5f); // รอ 5 วิแบบไม่หยุดเวลาเกม
+        fadeAnimation.SetTrigger("FadeIn");
+        yield return new WaitForSecondsRealtime(3f); // รอ 5 วิแบบไม่หยุดเวลาเกม
         StartCoroutine(EnterShopRoutine());
     }
 
@@ -31,14 +45,15 @@ public class EndGame : MonoBehaviour
 
         //FindObjectOfType<BGMManager>().ChangeShopBGM(); // เปิด Sound
 
-        yield return new WaitForSecondsRealtime(0.5f);
-        Debug.Log("OpenButton");
+        yield return new WaitForSecondsRealtime(1f);
+        transitionPanel.SetActive(false);
+        buttonSet.SetActive(true);
+        WriteScore();
     }
-    
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    private void WriteScore()
+    { 
+        playerPoint.SetText("Your Score : " + gameManager.Score);
+        playerDistance.SetText("Your Disatnce : " + Math.Round(gameManager.Distance, 2) + " km");
     }
 }

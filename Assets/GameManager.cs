@@ -45,7 +45,8 @@ public class GameManager : MonoBehaviour
         // FuelText.SetText("HP : " + player.health);
         if(isGameOver){
             gameProgressModifier = 0;
-            goodEnd.SetActive(true);
+            //goodEnd.SetActive(true); // ฉากจบ
+            badEnd.SetActive(true);
             return;
         }
         
