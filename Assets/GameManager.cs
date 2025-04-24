@@ -115,6 +115,7 @@ public class GameManager : MonoBehaviour
             gameProgressModifier = 2f;
         }
         
+        print(ParallaxBG.scrollSpeed);
     }
 
     public void GetScore(int enemyScore){
