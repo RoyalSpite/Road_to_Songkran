@@ -227,7 +227,7 @@ public class Player : MonoBehaviour
                 // for item
                 case GroundItemType.Fuel:{
                     health = Mathf.Min(
-                        fullHealth, health + 10
+                        fullHealth, health + (fullHealth / 2)
                     );
                     break;
                 }

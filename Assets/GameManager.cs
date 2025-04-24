@@ -86,16 +86,12 @@ public class GameManager : MonoBehaviour
         ScoreText.SetText("Score : "+Score);
 
         // update distance
-        Distance += Time.deltaTime * player.carSpeedMultiplier / 60f ;
+        Distance += Time.deltaTime * player.carSpeedMultiplier / 6f ;
         DistanceText.SetText(Math.Round(Distance, 2) +" Km");
 
         // ถ่ายทำ trailer
         if(!BossSpawner.bossSpawned){
-            if(Distance >= 2){
-                enemySpawner.maxEnemy01 = 0;
-                enemySpawner.maxEnemy02 = 0;
-            }
-            else if(Distance >= 1.7){
+            if(Distance >= 1.7){
                 enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length / 4;
                 enemySpawner.maxEnemy02 = enemySpawner.Enemies02Pool.Length / 2;
             }
