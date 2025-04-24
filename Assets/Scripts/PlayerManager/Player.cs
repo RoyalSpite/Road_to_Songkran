@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
     public float fireRate = 0.2f;  // เวลาหน่วงระหว่างยิงแต่ละครั้ง
     private float fireTimer = 0f;
     
-    public static bool enemyPresence = false;
+    public static bool enemyPresence = true;
 
     private Vector3 mousePosition;
 
@@ -102,11 +102,14 @@ public class Player : MonoBehaviour
         }
 
         // fire and cooldown
-        fireTimer += deltaTime;
-        if (fireTimer >= fireRate && enemyPresence)
-        {
-            Shoot();
-            fireTimer = 0f;
+        if (fireTimer >= fireRate){
+            if(enemyPresence){
+                Shoot();
+                fireTimer = 0f;
+            }
+        }
+        else{
+            fireTimer += deltaTime;
         }
 
         // child animation control

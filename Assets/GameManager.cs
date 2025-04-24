@@ -83,37 +83,62 @@ public class GameManager : MonoBehaviour
         Distance += Time.deltaTime * player.carSpeedMultiplier / 60f ;
         DistanceText.SetText(Math.Round(Distance, 2) +" Km");
 
-        // enemy progress
+        // ถ่ายทำ trailer
         if(!BossSpawner.bossSpawned){
-            if(Distance >= 90){
-                // BOSS IMCOMING
+            if(Distance >= 22){
                 enemySpawner.maxEnemy01 = 0;
                 enemySpawner.maxEnemy02 = 0;
             }
-            else if(Distance >= 70){
-                enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length;
-                enemySpawner.maxEnemy02 = enemySpawner.Enemies02Pool.Length;
-            }
-            else if(Distance >= 54){
-                enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length / 2;
+            else if(Distance >= 20){
+                enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length / 4;
                 enemySpawner.maxEnemy02 = enemySpawner.Enemies02Pool.Length / 2;
             }
-            else if(Distance >= 36){
-                enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length / 3;
+            else if(Distance >= 15){
+                enemySpawner.maxEnemy01 = Mathf.RoundToInt(enemySpawner.Enemies01Pool.Length / 4.5f);
                 enemySpawner.maxEnemy02 = enemySpawner.Enemies02Pool.Length / 3;
             }
-            else if(Distance >= 15){
-                enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length / 4;
+            else if(Distance >= 10){
+                enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length / 5;
                 enemySpawner.maxEnemy02 = enemySpawner.Enemies02Pool.Length / 4;
             }
-            else if(Distance >= 3){
-                enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length / 5;
+            else{
+                enemySpawner.maxEnemy01 = 0;
+                enemySpawner.maxEnemy02 = 0;
             }
         }
 
-        if(Distance >= 50){
-            gameProgressModifier = 2f;
-        }
+    
+        // enemy progress
+        // if(!BossSpawner.bossSpawned){
+        //     if(Distance >= 90){
+        //         // BOSS IMCOMING
+        //         enemySpawner.maxEnemy01 = 0;
+        //         enemySpawner.maxEnemy02 = 0;
+        //     }
+        //     else if(Distance >= 70){
+        //         enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length;
+        //         enemySpawner.maxEnemy02 = enemySpawner.Enemies02Pool.Length;
+        //     }
+        //     else if(Distance >= 54){
+        //         enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length / 2;
+        //         enemySpawner.maxEnemy02 = enemySpawner.Enemies02Pool.Length / 2;
+        //     }
+        //     else if(Distance >= 36){
+        //         enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length / 3;
+        //         enemySpawner.maxEnemy02 = enemySpawner.Enemies02Pool.Length / 3;
+        //     }
+        //     else if(Distance >= 15){
+        //         enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length / 4;
+        //         enemySpawner.maxEnemy02 = enemySpawner.Enemies02Pool.Length / 4;
+        //     }
+        //     else if(Distance >= 3){
+        //         enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length / 5;
+        //     }
+        // }
+
+        // if(Distance >= 50){
+        //     gameProgressModifier = 2f;
+        // }
 
     }
 

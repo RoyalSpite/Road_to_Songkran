@@ -31,12 +31,13 @@ public class Boss : MonoBehaviour
 
     private bool hasEntered = false; // เข้าไปจุดกลางจอแล้วหรือยัง
 
-    [Header("VisualSprite")]
-    [SerializeField] private Sprite normalSprite; // sprite ปกติ
-    [SerializeField] private Sprite hitSprite; // sprite ขาวล้วน โชว์ว่ายิงโดน
+    [Header("Explosion")]
+    [SerializeField] private GameObject explosion;
 
     [Header("HitCountdown")]
     public float hitTimer = 0f;
+
+    private bool isAlive = true;
 
 
     private void Start()
@@ -53,6 +54,17 @@ public class Boss : MonoBehaviour
 
     private void Update()
     {
+        if(!isAlive) return;
+        
+        if(health <= 0){
+            Player.enemyPresence = false;
+            isAlive = false;
+            gameObject.GetComponent<Animator>().SetBool("defeat", true);
+            explosion.SetActive(true);
+            explosion.GetComponent<Animator>().SetBool("isDestroyed", true);
+            return;
+        }
+
         if (!hasEntered)
         {
             MoveToEntryPoint();
@@ -184,7 +196,6 @@ public class Boss : MonoBehaviour
 
         if(health <= 0){
             // WIN THE GAME
-            Player.enemyPresence = false;
             return;
         }
         gameObject.GetComponent<Animator>().SetBool("hit", true);
