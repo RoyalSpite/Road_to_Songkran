@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
         ScoreText.SetText("Score : "+Score);
 
         // update distance
-        Distance += Time.deltaTime * player.carSpeedMultiplier / 6f ;
+        Distance += Time.deltaTime * player.carSpeedMultiplier / 60f ;
         DistanceText.SetText(Math.Round(Distance, 2) +" Km");
 
         // enemy progress
@@ -114,8 +114,7 @@ public class GameManager : MonoBehaviour
         if(Distance >= 50){
             gameProgressModifier = 2f;
         }
-        
-        print(ParallaxBG.scrollSpeed);
+
     }
 
     public void GetScore(int enemyScore){
