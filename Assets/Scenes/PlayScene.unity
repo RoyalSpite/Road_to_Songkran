@@ -5685,7 +5685,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossPrefab: {fileID: 593252094}
-  spawnDistance: 1
+  spawnDistance: 0
 --- !u!1001 &1344449267
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7708,7 +7708,6 @@ MonoBehaviour:
   bulletIndex: 0
   firePoint: {fileID: 1692601112}
   fireRate: 0.5
-  enemyPresence: 1
   target: {x: 0, y: 0, z: 0}
   pickupItem: 7
   ItemImgs:
