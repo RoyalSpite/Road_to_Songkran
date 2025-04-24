@@ -19,11 +19,12 @@ public class BossSpawner : MonoBehaviour
     private void Update()
     {
         if (bossSpawned) return; // ถ้า spawn ไปแล้ว ไม่ต้องเช็กอีก
-        FindObjectOfType<BGMManager>().ChangeBossBGM();
+        print("asdfg");
 
         float currentDistance = gameManager.Distance;
 
         if (currentDistance >= spawnDistance){
+            FindObjectOfType<BGMManager>().ChangeBossBGM();
             gameManager.CancelEnemySpawn();
             bossPrefab.SetActive(true); // เปิดบอส
             bossSpawned = true;

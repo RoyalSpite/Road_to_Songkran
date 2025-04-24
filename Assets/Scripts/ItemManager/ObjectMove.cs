@@ -16,7 +16,7 @@ public class ObjectMove : MonoBehaviour
         if(GameManager.isGameOver) return;
         
         transform.Translate(
-            moveSpeed * ParallaxBG.scrollSpeed * Time.deltaTime * Vector3.left
+            moveSpeed * Time.deltaTime * Vector3.left
         );
     }
 
