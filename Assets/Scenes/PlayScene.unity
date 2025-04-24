@@ -4251,7 +4251,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 767106487}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1929231126}
+        m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
+        m_MethodName: PauseGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &767106487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7139,7 +7151,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1334266871}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1929231126}
+        m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
+        m_MethodName: ToMainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1334266871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8883,7 +8907,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1627210930}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1929231126}
+        m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
+        m_MethodName: ResumeGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1627210930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9861,6 +9897,7 @@ GameObject:
   - component: {fileID: 1929231123}
   - component: {fileID: 1929231125}
   - component: {fileID: 1929231124}
+  - component: {fileID: 1929231126}
   m_Layer: 5
   m_Name: PauseUIPanel
   m_TagString: Untagged
@@ -9927,6 +9964,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1929231122}
   m_CullTransparentMesh: 1
+--- !u!114 &1929231126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1929231122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e08318208a0cf294a8f7e4d14c3b887a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pausePanel: {fileID: 1929231122}
+  resumeButton: {fileID: 1627210929}
+  quitButton: {fileID: 1334266870}
 --- !u!1 &1939051171
 GameObject:
   m_ObjectHideFlags: 0

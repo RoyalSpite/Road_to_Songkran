@@ -32,12 +32,12 @@ public class MenuButton : MonoBehaviour
 
     public void CreditOpen()
     {
-        howToPanel.SetActive(true);
+        creditPanel.SetActive(true);
     }
 
     public void CreditClose()
     {
-        howToPanel.SetActive(false);
+        creditPanel.SetActive(false);
     }
 
     public void ExitGame()
