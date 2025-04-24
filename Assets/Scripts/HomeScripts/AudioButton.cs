@@ -18,6 +18,6 @@ public class AudioButton : MonoBehaviour
         Debug.Log("Switched!!");
 
         // ปิดหรือเปิดเสียง
-        //AudioListener.volume = isMuted ? 0f : 1f;
+        AudioListener.volume = isMuted ? 0f : 1f;
     }
 }

@@ -8,6 +8,7 @@ public class Pointer : MonoBehaviour
     [SerializeField]private RectTransform pointer; 
     [SerializeField]private RectTransform audioBut; 
     [SerializeField]private RectTransform Logo; 
+    [SerializeField]private RectTransform exitBut; 
     [SerializeField]private float additionalOffsetX = -25f;
 
     private void Update()
@@ -42,13 +43,13 @@ public class Pointer : MonoBehaviour
             position = Input.mousePosition
         };
 
-        var raycastResults = new System.Collections.Generic.List<RaycastResult>();
+        var raycastResults = new List<RaycastResult>();
         EventSystem.current.RaycastAll(pointerData, raycastResults);
 
         foreach (var result in raycastResults)
         {
             // เช็กว่าไม่ใช่ตัว pointer เอง
-            if (result.gameObject != pointer.gameObject && result.gameObject != audioBut.gameObject && result.gameObject != Logo.gameObject)
+            if (result.gameObject != pointer.gameObject && result.gameObject != audioBut.gameObject && result.gameObject != Logo.gameObject && result.gameObject != exitBut.gameObject)
             {
                 return result.gameObject;
             }
