@@ -18,8 +18,8 @@ public class ShopSpawner : MonoBehaviour
     private bool shopSpawned = false;
     private bool isShopMoving = false; // <<< เพิ่มตัวนี้
 
-    private float signSpawnDistance = 0.5f; // 0.5 กิโลเมตร หรือ 500 หน่วย
-    private float shopSpawnDistance = 1f; // 1 กิโลเมตร หรือ 1000 หน่วย
+    [SerializeField]private float signSpawnDistance = 0.5f; // 0.5 กิโลเมตร หรือ 500 หน่วย
+    [SerializeField]private float shopSpawnDistance = 1f; // 1 กิโลเมตร หรือ 1000 หน่วย
 
     public float shopMoveSpeed = 5f; // ความเร็วในการเลื่อน
 
@@ -40,9 +40,7 @@ public class ShopSpawner : MonoBehaviour
 
         if (!shopSpawned && currentDistance >= shopSpawnDistance)
         {
-
             mover.enabled = true;
-            
             isShopMoving = true;
             shopSpawned = true;
             Debug.Log("Spawned Shop at distance: " + shopSpawnDistance);

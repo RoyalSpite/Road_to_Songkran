@@ -60,6 +60,7 @@ public class Enemy02 : EnemyBase{
 
     private void Fire(){
         player.GetComponent<Player>().health -= 2;
+        sound.PlayShootSound();
     }
 
     public void Spawn(Vector3 initPos){

@@ -14,11 +14,13 @@ public class EnemySoundController : MonoBehaviour
     public void PlayShootSound()
     {
         PlaySound(shootClip);
+        Debug.Log("Shoot");
     }
 
     public void PlayHitSound()
     {
         PlaySound(hitClip);
+        Debug.Log("Dead");
     }
 
     private void PlaySound(AudioClip clip)

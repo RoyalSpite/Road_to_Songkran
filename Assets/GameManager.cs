@@ -17,6 +17,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI ScoreText;
     [SerializeField] private TextMeshProUGUI DistanceText;
 
+    [Header("Ending")]
+    [SerializeField] private GameObject goodEnd;
+    [SerializeField] private GameObject badEnd;
+
 
     [Header("MovementIndex")]
     [SerializeField] private int laneIndex = 0;
@@ -41,6 +45,7 @@ public class GameManager : MonoBehaviour
         // FuelText.SetText("HP : " + player.health);
         if(isGameOver){
             gameProgressModifier = 0;
+            goodEnd.SetActive(true);
             return;
         }
         
@@ -85,21 +90,21 @@ public class GameManager : MonoBehaviour
 
         // ถ่ายทำ trailer
         if(!BossSpawner.bossSpawned){
-            if(Distance >= 22){
+            if(Distance >= 2){
                 enemySpawner.maxEnemy01 = 0;
                 enemySpawner.maxEnemy02 = 0;
             }
-            else if(Distance >= 20){
+            else if(Distance >= 1.7){
                 enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length / 4;
                 enemySpawner.maxEnemy02 = enemySpawner.Enemies02Pool.Length / 2;
             }
-            else if(Distance >= 15){
+            else if(Distance >= 1.3){
                 enemySpawner.maxEnemy01 = Mathf.RoundToInt(enemySpawner.Enemies01Pool.Length / 4.5f);
                 enemySpawner.maxEnemy02 = enemySpawner.Enemies02Pool.Length / 3;
             }
-            else if(Distance >= 10){
+            else if(Distance >= 0.7){
                 enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length / 5;
-                enemySpawner.maxEnemy02 = enemySpawner.Enemies02Pool.Length / 4;
+                enemySpawner.maxEnemy02 = enemySpawner.Enemies02Pool.Length / 5;
             }
             else{
                 enemySpawner.maxEnemy01 = 0;

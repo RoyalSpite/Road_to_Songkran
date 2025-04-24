@@ -25,12 +25,18 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] GameObject HitMark;
     private float HitCountDown = -1;
 
+    protected void Awake()
+    {
+        sound = GetComponent<EnemySoundController>();
+    }
+
     protected void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
         health = baseHealth;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        sound = GetComponent<EnemySoundController>();
+        sound.enabled = true;
+
     }
 
     protected void Update()
