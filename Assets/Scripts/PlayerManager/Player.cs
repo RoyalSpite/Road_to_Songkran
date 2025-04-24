@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,7 +40,7 @@ public class Player : MonoBehaviour
     public float fireRate = 0.2f;  // เวลาหน่วงระหว่างยิงแต่ละครั้ง
     private float fireTimer = 0f;
     
-    public bool enemyPresence = false;
+    public static bool enemyPresence = false;
 
     private Vector3 mousePosition;
 

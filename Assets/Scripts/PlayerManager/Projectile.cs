@@ -35,7 +35,9 @@ public class Projectile : MonoBehaviour
 
             }
             else if(other.CompareTag("Boss")){
-                print("hit boss");
+                if(other.gameObject.GetComponent<Boss>().health <= 0){
+                    return;
+                }
                 other.gameObject.GetComponent<Boss>().Hit(Damage);
                 OnBecameInvisible();
             }

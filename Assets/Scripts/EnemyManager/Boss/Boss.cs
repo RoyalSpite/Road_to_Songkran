@@ -169,18 +169,14 @@ public class Boss : MonoBehaviour
 
     private void HandleHit(){
 
-        // if (hitTimer <= 0) return;
+        if (hitTimer <= 0) return;
 
-        // hitTimer -= Time.deltaTime / 60f;
+        hitTimer -= Time.deltaTime;
         // print("Hit");
 
-        // if (hitTimer <= 0){
-        //     hitTimer = 0f;
-        //     gameObject.GetComponent<SpriteRenderer>().sprite = normalSprite;
-        // }
-        // else{
-        //     gameObject.GetComponent<SpriteRenderer>().sprite = hitSprite;
-        // }
+        gameObject.GetComponent<Animator>().SetBool("hit", hitTimer > 0);
+        if (hitTimer <= 0) hitTimer = 0f;
+
     }
 
     public void Hit(float Damage){
@@ -188,8 +184,11 @@ public class Boss : MonoBehaviour
 
         if(health <= 0){
             // WIN THE GAME
-
+            Player.enemyPresence = false;
             return;
         }
+        gameObject.GetComponent<Animator>().SetBool("hit", true);
+        hitTimer = 0.1f;
     }
+
 }

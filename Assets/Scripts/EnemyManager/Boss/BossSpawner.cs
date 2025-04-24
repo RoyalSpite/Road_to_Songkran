@@ -19,7 +19,6 @@ public class BossSpawner : MonoBehaviour
     private void Update()
     {
         if (bossSpawned) return; // ถ้า spawn ไปแล้ว ไม่ต้องเช็กอีก
-        print("asdfg");
 
         float currentDistance = gameManager.Distance;
 

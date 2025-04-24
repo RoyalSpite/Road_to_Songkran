@@ -126,12 +126,12 @@ TextureImporter:
       name: Boss_sprite_Hit_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 150
-        height: 90
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 13
+        y: 5
+        width: 125
+        height: 66
+      alignment: 9
+      pivot: {x: 0.5591133, y: 0.1683957}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
