@@ -16,20 +16,24 @@ public class BGMManager : MonoBehaviour
 
         if (audioSource == null)
         {
-            Debug.LogError("BGMSoundManager: ไม่มี AudioSource ติดอยู่ใน GameObject!");
+            Debug.LogError("AudioSource Null GameObject!");
         }
     }
 
-    // ฟังก์ชันสำหรับเปลี่ยน BGM
+    private void Start()
+    {
+        ChangeBGM(inGameSound, 0.185f);
+    }
+
     private void ChangeBGM(AudioClip newClip, float volume = 1f)
     {
         if (newClip == null)
         {
-            Debug.LogWarning("ChangeBGM: ไม่มี AudioClip ถูกส่งมา!");
+            Debug.LogWarning("ChangeBGM: Not Found AudioClip!");
             return;
         }
 
-        audioSource.Stop(); // หยุดเพลงเก่า
+        audioSource.Stop(); // ๏ฟฝ๏ฟฝุด๏ฟฝลง๏ฟฝ๏ฟฝ๏ฟฝ
         audioSource.clip = newClip;
         audioSource.volume = volume;
         audioSource.Play();

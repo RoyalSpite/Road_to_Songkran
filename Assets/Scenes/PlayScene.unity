@@ -3841,10 +3841,10 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: a4140e7cf71b1ca4da2f0a8e34387cc5, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.185
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -3940,7 +3940,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inGameSound: {fileID: 8300000, guid: a4140e7cf71b1ca4da2f0a8e34387cc5, type: 3}
   shopSound: {fileID: 8300000, guid: abf13a2c7db95374a8fc5f69d796f550, type: 3}
-  bossSound: {fileID: 0}
+  bossSound: {fileID: 8300000, guid: 9037e225d74ff15408bd82533edf8012, type: 3}
 --- !u!1 &837584078
 GameObject:
   m_ObjectHideFlags: 0
@@ -6401,7 +6401,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -30.87996, y: 0}
+  m_AnchoredPosition: {x: -30.879944, y: 0}
   m_SizeDelta: {x: -799.12, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1549104741
