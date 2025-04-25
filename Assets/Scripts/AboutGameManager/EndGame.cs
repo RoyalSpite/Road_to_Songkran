@@ -13,9 +13,12 @@ public class EndGame : MonoBehaviour
     [SerializeField] private TextMeshProUGUI playerPoint;
     [SerializeField] private TextMeshProUGUI playerDistance;
 
+    public static int score;
+    public static float distance;
+
+
     private Animator transitionAnimator;
     private Animator fadeAnimation;
-    private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +28,6 @@ public class EndGame : MonoBehaviour
 
         transitionAnimator = transitionPanel.GetComponent<Animator>();
         fadeAnimation = GetComponent<Animator>();   
-        gameManager = FindObjectOfType<GameManager>();
         buttonSet.SetActive(false);
         
         StartCoroutine(DelayBeforeShop());
@@ -45,7 +47,7 @@ public class EndGame : MonoBehaviour
 
         //FindObjectOfType<BGMManager>().ChangeShopBGM(); // เปิด Sound
 
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(2f);
         transitionPanel.SetActive(false);
         buttonSet.SetActive(true);
         WriteScore();
@@ -53,7 +55,19 @@ public class EndGame : MonoBehaviour
 
     private void WriteScore()
     { 
-        playerPoint.SetText("Your Score : " + gameManager.Score);
-        playerDistance.SetText("Your Disatnce : " + Math.Round(gameManager.Distance, 2) + " km");
+        playerPoint.SetText("Your Score : " + score);
+        playerDistance.SetText("Your Disatnce : " + Math.Round(distance, 2) + " km");
     }
+
+    public void ToMainMenu(){
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void Restart(){
+        GameManager.isGameOver = false;
+        print(GameManager.isGameOver);
+        GameManager.gameProgressModifier = 1f;
+        SceneManager.LoadSceneAsync("PlayScene");
+    }
+
 }

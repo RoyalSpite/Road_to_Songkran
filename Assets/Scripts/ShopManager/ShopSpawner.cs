@@ -18,8 +18,8 @@ public class ShopSpawner : MonoBehaviour
     private bool shopSpawned = false;
     private bool isShopMoving = false; // <<< เพิ่มตัวนี้
 
-    [SerializeField]private float shopSpawnDistance = 0.5f; // 1 กิโลเมตร หรือ 1000 หน่วย
-    [SerializeField]private float signSpawnDistance = 1; // 0.5 กิโลเมตร หรือ 500 หน่วย
+    [SerializeField] private float shopSpawnDistance = 30f; // 1 กิโลเมตร หรือ 1000 หน่วย
+    [SerializeField] private float signSpawnDistance = 27.5f; // 0.5 กิโลเมตร หรือ 500 หน่วย
 
 
     public float shopMoveSpeed = 5f; // ความเร็วในการเลื่อน

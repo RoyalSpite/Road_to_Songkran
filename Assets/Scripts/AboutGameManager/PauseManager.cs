@@ -10,19 +10,28 @@ public class PauseManager : MonoBehaviour
 
     void Start()
     {
-        pausePanel.SetActive(false);
+        // pausePanel.SetActive(false);
         resumeButton.onClick.AddListener(ResumeGame);
     }
      
     public void PauseGame()
     {
-        pausePanel.SetActive(true);
+        print("pause");
+        // pausePanel.SetActive(true);
+        pausePanel.gameObject.GetComponent<Image>().color = new Color(1,1,1,0.5f);
+        resumeButton.gameObject.SetActive(true);
+        quitButton.gameObject.SetActive(true);
+
         Time.timeScale = 0f;
     }
 
     public void ResumeGame()
     {
-        pausePanel.SetActive(false);
+        // pausePanel.SetActive(false);
+        pausePanel.gameObject.GetComponent<Image>().color = new Color(1,1,1,0);
+
+        resumeButton.gameObject.SetActive(true);
+        quitButton.gameObject.SetActive(true);
         Time.timeScale = 1f;
     }
 
@@ -30,4 +39,5 @@ public class PauseManager : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu");
     }
+
 }

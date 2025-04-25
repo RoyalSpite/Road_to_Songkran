@@ -8,6 +8,7 @@ public class EnemySoundController : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
 
     [Header("Clips")]
+    [SerializeField] public AudioClip spawnClip;
     [SerializeField] private AudioClip shootClip;
     [SerializeField] private AudioClip hitClip;
 
@@ -22,6 +23,13 @@ public class EnemySoundController : MonoBehaviour
         PlaySound(hitClip);
         Debug.Log("Dead");
     }
+
+    public void PlaySpawnSound()
+    {
+        PlaySound(hitClip);
+        Debug.Log("Dead");
+    }
+
 
     private void PlaySound(AudioClip clip)
     {

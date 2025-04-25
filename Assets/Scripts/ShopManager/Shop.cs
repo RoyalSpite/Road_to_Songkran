@@ -41,22 +41,19 @@ public class Shop : MonoBehaviour
         // เลือก effect ตามไอเทม
         switch (itemIndex)
         {
-            case 0:
-                player.health = Mathf.Min(player.fullHealth, player.health + 30);
-                audioSorce.Play();
-                break;
             case 1:
-                player.baseCarSpeedMultiplier += 0.5f;
-                player.carSpeedMultiplier += 0.5f;
-                audioSorce.Play();
+                player.health = player.fullHealth;
                 break;
             case 2:
-                player.baseScoreMultiplier += 1;
-                player.scoreMultiplier += 1;
-                audioSorce.Play();
+                player.baseCarSpeedMultiplier += 0.65f;
+                player.carSpeedMultiplier += 0.65f;
+                break;
+            case 0:
+                player.baseWeaponDamage += 1;
+                player.weaponDamage += 1;
                 break;
         }
-
+        audioSorce.Play();
         // กดซื้อแล้ว disable ปุ่ม
         clickedButton.interactable = false;
     }

@@ -50,7 +50,7 @@ public class EnemySpawner : MonoBehaviour
 
         countDown += Time.deltaTime;
 
-        TimeToSpawn01 = Mathf.RoundToInt(countDown * 2 * 10);
+        TimeToSpawn01 = Mathf.RoundToInt(countDown * 10);
         for(int i = 0 ; i < maxEnemy01 ; i++){
             if(TimeToSpawn01 == Enemy01SpawnTime[i]){
                 if(!Enemies01Pool[i].activeSelf){

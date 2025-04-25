@@ -39,6 +39,9 @@ public class Boss : MonoBehaviour
 
     private bool isAlive = true;
 
+    [Header("Sound")]
+    [SerializeField] protected EnemySoundController sound;
+
 
     private void Start()
     {
@@ -197,6 +200,8 @@ public class Boss : MonoBehaviour
 
         if(health <= 0){
             // WIN THE GAME
+            sound.PlayHitSound();
+            GameObject.Find("GameManager").GetComponent<GameManager>().GoodEnd();
             return;
         }
         gameObject.GetComponent<Animator>().SetBool("hit", true);

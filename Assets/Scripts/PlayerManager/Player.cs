@@ -75,7 +75,7 @@ public class Player : MonoBehaviour
             transform.Find("ExplosionAnim").
                 gameObject.GetComponent<Animator>().SetBool("isDestroyed", true);
 
-            GameManager.isGameOver = true;
+            GameObject.Find("GameManager").GetComponent<GameManager>().BadEnd();
             return;
             // Time.timeScale = 0;
         }

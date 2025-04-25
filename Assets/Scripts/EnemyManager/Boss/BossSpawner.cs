@@ -5,7 +5,7 @@ using UnityEngine;
 public class BossSpawner : MonoBehaviour
 {
     public GameObject bossPrefab; // Prefab หรือ GameObject ของบอสที่เอามา SetActive
-    public float spawnDistance = 22f; // ระยะที่ต้องการให้บอสโผล่ (กิโลเมตรหรือหน่วยอะไรก็ได้)
+    public float spawnDistance = 2f; // ระยะที่ต้องการให้บอสโผล่ (กิโลเมตรหรือหน่วยอะไรก็ได้)
 
     private GameManager gameManager;
     public static bool bossSpawned = false;
@@ -24,6 +24,7 @@ public class BossSpawner : MonoBehaviour
 
         if (currentDistance >= spawnDistance){
             FindObjectOfType<BGMManager>().ChangeBossBGM();
+            bossPrefab.GetComponent<EnemySoundController>().PlaySpawnSound();
             gameManager.CancelEnemySpawn();
             bossPrefab.SetActive(true); // เปิดบอส
             bossSpawned = true;

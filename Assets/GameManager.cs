@@ -1,6 +1,8 @@
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,7 +23,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject goodEnd;
     [SerializeField] private GameObject badEnd;
 
-
     [Header("MovementIndex")]
     [SerializeField] private int laneIndex = 0;
 
@@ -33,20 +34,42 @@ public class GameManager : MonoBehaviour
 
     public static float gameProgressModifier = 1f;
 
+    public float[] DistanceProgress;
+
     public static bool isGameOver = false;
+
+    [SerializeField] GameObject Transition;
+    [SerializeField] float TransitionTimer = 0f;
+
+    bool isGood = true;
 
     void Start(){
         player.transform.position = roadPosition[laneIndex].position;
+        gameProgressModifier = 1f;
+        isGameOver = false;
     }
 
     // Update is called once per frame
     void Update(){
 
         // FuelText.SetText("HP : " + player.health);
-        if(isGameOver){
-            gameProgressModifier = 0;
+        if(TransitionTimer > 0){
+            TransitionTimer -= Time.deltaTime * 5;
+            Color tmpColor = Transition.GetComponent<Image>().color;
+            tmpColor.a += Time.deltaTime * 5;
+
+            Transition.GetComponent<Image>().color = tmpColor; 
+
+            if(TransitionTimer <= 0){
+                EndGame.score = Score;
+                EndGame.distance = Distance;
+
+                if(isGood){
+                    SceneManager.LoadScene("GoodEnd");
+                }
+                else SceneManager.LoadScene("BadEnd");
+            }
             //goodEnd.SetActive(true); // ฉากจบ
-            badEnd.SetActive(true);
             return;
         }
         
@@ -88,59 +111,38 @@ public class GameManager : MonoBehaviour
         // update distance
         Distance += Time.deltaTime * player.carSpeedMultiplier / 6f ;
         DistanceText.SetText(Math.Round(Distance, 2) +" Km");
-
-        // ถ่ายทำ trailer
+    
+        // enemy progress
         if(!BossSpawner.bossSpawned){
-            if(Distance >= 1.7){
-                enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length / 4;
-                enemySpawner.maxEnemy02 = enemySpawner.Enemies02Pool.Length / 2;
-            }
-            else if(Distance >= 1.3){
-                enemySpawner.maxEnemy01 = Mathf.RoundToInt(enemySpawner.Enemies01Pool.Length / 4.5f);
-                enemySpawner.maxEnemy02 = enemySpawner.Enemies02Pool.Length / 3;
-            }
-            else if(Distance >= 0.7){
-                enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length / 5;
-                enemySpawner.maxEnemy02 = enemySpawner.Enemies02Pool.Length / 5;
-            }
-            else{
+            if(Distance >= 40){
+                // BOSS IMCOMING
                 enemySpawner.maxEnemy01 = 0;
                 enemySpawner.maxEnemy02 = 0;
             }
+            else if(Distance >= 30){
+                enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length;
+                enemySpawner.maxEnemy02 = enemySpawner.Enemies02Pool.Length;
+            }
+            else if(Distance >= 25){
+                enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length / 2;
+                enemySpawner.maxEnemy02 = enemySpawner.Enemies02Pool.Length / 2;
+            }
+            else if(Distance >= 20){
+                enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length / 3;
+                enemySpawner.maxEnemy02 = enemySpawner.Enemies02Pool.Length / 3;
+            }
+            else if(Distance >= 10){
+                enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length / 4;
+                enemySpawner.maxEnemy02 = enemySpawner.Enemies02Pool.Length / 4;
+            }
+            else if(Distance >= 3){
+                enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length / 5;
+            }
         }
 
-    
-        // enemy progress
-        // if(!BossSpawner.bossSpawned){
-        //     if(Distance >= 90){
-        //         // BOSS IMCOMING
-        //         enemySpawner.maxEnemy01 = 0;
-        //         enemySpawner.maxEnemy02 = 0;
-        //     }
-        //     else if(Distance >= 70){
-        //         enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length;
-        //         enemySpawner.maxEnemy02 = enemySpawner.Enemies02Pool.Length;
-        //     }
-        //     else if(Distance >= 54){
-        //         enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length / 2;
-        //         enemySpawner.maxEnemy02 = enemySpawner.Enemies02Pool.Length / 2;
-        //     }
-        //     else if(Distance >= 36){
-        //         enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length / 3;
-        //         enemySpawner.maxEnemy02 = enemySpawner.Enemies02Pool.Length / 3;
-        //     }
-        //     else if(Distance >= 15){
-        //         enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length / 4;
-        //         enemySpawner.maxEnemy02 = enemySpawner.Enemies02Pool.Length / 4;
-        //     }
-        //     else if(Distance >= 3){
-        //         enemySpawner.maxEnemy01 = enemySpawner.Enemies01Pool.Length / 5;
-        //     }
-        // }
-
-        // if(Distance >= 50){
-        //     gameProgressModifier = 2f;
-        // }
+        if(Distance >= 25){
+            gameProgressModifier = 2f;
+        }
 
     }
 
@@ -151,5 +153,22 @@ public class GameManager : MonoBehaviour
     public void CancelEnemySpawn(){
         enemySpawner.maxEnemy01 = 0;
         enemySpawner.maxEnemy02 = 0;
+    }
+
+    public void GameOver(){
+        gameProgressModifier = 1f;
+        isGameOver = true;
+        TransitionTimer = 1f;
+    }
+
+    public void BadEnd(){
+        isGood = false;
+        GameOver();
+    }
+
+    public void GoodEnd(){
+        isGood = true;
+        GameOver();
+        
     }
 }
