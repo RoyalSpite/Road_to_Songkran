@@ -37,10 +37,9 @@ public class EnemySpawner : MonoBehaviour
         maxEnemy01 = 0;
         maxEnemy02 = Enemies02Pool.Length / 5;
 
-        for(int i = 0 ; i < Enemy01SpawnTime.Length ; i ++){
+        for(int i = 0 ; i < Enemy01SpawnTime.Length; i ++){
             Enemy01SpawnTime[i] = i;
         }
-
 
     }
 
@@ -58,7 +57,8 @@ public class EnemySpawner : MonoBehaviour
                     Enemies01Pool[i].SetActive(true);
                     
                     Enemies01Pool[i].GetComponent<Enemy01>().Spawn(
-                        (TimeToSpawn01 < 10)? UpperLane.position : LowerLane.position
+                        (TimeToSpawn01 < (Enemy01SpawnTime.Length / 2))? 
+                            UpperLane.position : LowerLane.position
                     );
                 }
             }

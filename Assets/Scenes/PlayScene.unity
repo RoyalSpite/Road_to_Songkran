@@ -1943,8 +1943,8 @@ MonoBehaviour:
   shopPrefab: {fileID: 677126189342281911, guid: b23cb25ee947fba4984253db8891985d, type: 3}
   mover: {fileID: 1725628020}
   spawnPoint: {fileID: 1652131952}
-  signSpawnDistance: 1
   shopSpawnDistance: 1.5
+  signSpawnDistance: 1
   shopMoveSpeed: 5
 --- !u!114 &462363602
 MonoBehaviour:
@@ -2870,6 +2870,7 @@ GameObject:
   - component: {fileID: 593252097}
   - component: {fileID: 593252099}
   - component: {fileID: 593252100}
+  - component: {fileID: 593252101}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Boss
@@ -3088,6 +3089,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &593252101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593252094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 115b14a17feccdd47b2bc04dc527feca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
+  shootClip: {fileID: 8300000, guid: 586791c1f5ad4db48bfff0cb96d73445, type: 3}
+  hitClip: {fileID: 0}
 --- !u!1001 &623457213
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3755,7 +3771,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -40.29}
+  m_AnchoredPosition: {x: 0, y: -40.29001}
   m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &767106486
@@ -6927,7 +6943,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 150.00002, y: 94.96}
+  m_AnchoredPosition: {x: 150.00002, y: 94.95999}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1354047412
@@ -10505,7 +10521,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -150.00002, y: 94.96}
+  m_AnchoredPosition: {x: -150.00002, y: 94.95999}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2119217765

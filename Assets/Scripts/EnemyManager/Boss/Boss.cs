@@ -162,6 +162,7 @@ public class Boss : MonoBehaviour
             // Spawn กระสุน
             GameObject bullet = Instantiate(bulletPrefab, lanePositions[lane - 1].position, Quaternion.identity);
             bullet.tag = "EnemyBullet";
+            bullet.GetComponent<SpriteRenderer>().color = Color.red;
 
             // กำหนดทิศทางให้กระสุน (ไปทางซ้าย)
             Vector2 direction = Vector2.left;
